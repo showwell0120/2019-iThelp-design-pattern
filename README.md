@@ -1,8 +1,22 @@
-# design-pattern-typescript-react
+# Design-Pattern-Typescript-React
 
 ## 從哪裡開始?
 
-這個專案是以 monprepo 的架構管理。每天的文章內文跟程式碼都會在`packages`, package 名稱格式為`day${X}-OOO-pattern`
+這個專案是以 monprepo 的架構管理。每天的文章內文跟程式碼都會在`packages`, package 名稱格式為`day${X}-${類型}-${名稱}`
+
+## 建置指令
+
+### 安裝初始套件
+
+`yarn install`
+
+### storybook
+
+`yarn story`
+
+### jest
+
+`yarn test`
 
 ## 套件管理
 
@@ -29,20 +43,6 @@
 ### 在 package 移除套件
 
 `yarn workspace @monprepo-react-starter/core remove <npm pkg1> <npm pkg2> ...`
-
-## 建置指令
-
-### 安裝初始套件
-
-`yarn install`
-
-### storybook
-
-`yarn story`
-
-### jest
-
-`yarn test`
 
 ## 參考
 

@@ -1,5 +1,5 @@
 {
-  "name": "design-pattern-typescript-react",
+  "name": "Design-Pattern-Typescript-React",
   "private": true,
   "scripts": {
     "story": "start-storybook -p 6006",
