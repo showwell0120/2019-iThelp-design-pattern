@@ -1,0 +1,10 @@
+{
+  "name": "@Design-Pattern-Typescript-React/day21-behavioral-chain-of-responsibility",
+  "version": "0.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  }
+}
