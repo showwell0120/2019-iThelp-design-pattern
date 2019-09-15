@@ -10,11 +10,11 @@
 
 `yarn install`
 
-### storybook
+### 執行 storybook
 
 `yarn story`
 
-### jest
+### 執行 jest
 
 `yarn test`
 
