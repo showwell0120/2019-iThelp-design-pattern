@@ -1,6 +1,7 @@
-# [Day6] 建立型模式 ─ 抽象工廠(Abstract Factory)
+# [Day6] 老闆：一碗大腸麵線不要大腸然後加顆蛋 ─ 抽象工廠(Abstract Factory)
 
 嗨 大家好 我是一路爬坡的阿肥   
+
 昨天發現到殘酷的事實後   
 決定在出遊前把剩下的天數都寫完 ~~(感覺出遊前會先被榨乾)~~    
 然後用10個鬧鐘提醒我記得把筆電放進行李   
@@ -22,4 +23,4 @@
 
 ### 參考資料   
 
-- [維基百科](https://zh.wikipedia.org/wiki/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F_(%E8%AE%A1%E7%AE%97%E6%9C%BA)#%E5%88%86%E7%B1%BB)
+- [設計模式 - 工廠方法及抽象工廠](https://blog.techbridge.cc/2017/05/22/factory-method-and-abstract-factory/)
