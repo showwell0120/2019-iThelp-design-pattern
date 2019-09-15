@@ -1,5 +1,5 @@
 {
-  "name": "@Design-Pattern-Typescript-React/day9-creational-singleton",
+  "name": "@Design-Pattern-Typescript-React/day08-creational-builder",
   "version": "0.0.0",
   "main": "index.js",
   "license": "MIT",
