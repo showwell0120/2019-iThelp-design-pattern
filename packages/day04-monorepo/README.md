@@ -25,7 +25,7 @@ Mono-Repo的好處主要有：
 
 不過有幾個問題是：
 - 程式碼會日益龐大，目錄結構會日趨複雜。因此在建立初期，最後可以做好規劃，並保有彈性
-- 建置測試的時間可能會愈花愈長。所以在開發工具與環境設定時盡量能區分專案各自的範圍，只針對影響的範圍進行測試
+- 建置測試的時間可能會愈花愈長。所以在開發工具與環境設定時，盡量能區分專案各自的範圍，只針對影響的範圍進行測試
 
 ## Lerna ft. Yarn Workspaces
 簡單來說：
@@ -52,11 +52,9 @@ Mono-Repo的好處主要有：
 `yarn add -DW <npm pkg1> <npm pkg2> ...`
 
 // 在 package 加入外部套件作為 peerDependencies
-
 `yarn workspace @project-name/pkg-name add -P <npm pkg1> <npm pkg2> ...`
 
 // 在 package 加入內部套件作為 dependencies
-
 `yarn lerna add @project-name/pkg-name1  --scope=@project-name/pkg-name2`
 ```
 
