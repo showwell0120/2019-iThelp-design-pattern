@@ -9,10 +9,124 @@
 ---
 
 ## 成本高 維護難 這樣的前端你喜歡嗎？
+在React、Vue等這些前端框架成為主流之前，許多人通常是使用jQuery或純JS進行開發。
 
-## 是虛也是實 初探React
+jQuery和純JS的開發模式主要是靠對真實DOM進行事件的綁定與操作，每一次的更新都會引起頁面整個重新渲染。當開發小型或簡單邏輯的網頁應用程式時，靠jQuery和純JS就能實現，不僅能單純化專案的架構，也不太需要考慮性能的問題。
 
-## 各位 已經到16.9囉 
+但是，當專案的規模與複雜度提升的時候，傳統的寫法就會引起以下這兩種問題：
+
+- 每一次微幅的更新，就要整個重新渲染頁面上的DOM。當DOM的結構愈深，就造成更多成本上的浪費
+- 愈來愈多的事件管理與DOM操作綁在一起，可讀性更低，日後更難維護程式
+
+因此，Facebook為了要克服這些問題，發展出了React這套UI函式庫，也推動了前端開發進到下一個更成熟的階段。
+
+## 你不能不知道的React
+寫第一行React之前，最重要的事情不是直接看Get Start寫出Hello World，而是了解它運作的基礎和架構。
+
+話不多說，來看看哪些是必須要知道的觀念吧！
+
+### Virtual DOM
+Virtual DOM是描述真實DOM的數據結構，並且以樹狀呈現DOM的巢狀關係。當資料一有更新，程式並不會直接呼叫頁面重新渲染，而是比對出差異的地方，一段時間後批次更新對應到的真實DOM。這樣做即可大幅改善上面問題的第一點，讓開發者不必花額外的力氣優化效能。
+
+![來源：https://cythilya.github.io](https://cythilya.github.io/assets/2017-03-31-virtual-dom.png)
+
+### JSX & Component
+在寫jQuery和純JS的時代，我們會把模板寫成html檔、樣式寫成css檔，以及邏輯互動寫成js檔，讓軟體開發中的V(View)的部分更進一步做關注點分離。
+但是在React中，能獨立運作的最小單位就是元件(Component)，並且使用JSX語法糖，將模板的建立、邏輯互動的綁定，甚至是注入樣式(可以參考 [styled-component](https://www.styled-components.com/))，用更方便的方式寫在元件中。
+
+```jsx
+// Class Component
+class CompA extends React.Component {
+    constructor() {
+        //...
+    }
+    render {
+        {/* JSX的註記這樣寫 */}
+        {/* 變數用{}包起來 */}
+        return <div>{this.props.wording}</div>
+    }
+}
+
+// 用Typescript寫Functional Component
+const CompB:React.FC<I_Props_CompB> = props => {
+    {/*以標籤的方式建立元件*/}
+    return <CompA wording="Hello~" />
+}
+```
+
+### One-Way Data Binding & Two-Way Data Binding
+資料綁定(Data Binding)指的是資料端與UI端之間會透過事件的綁定，當某一端有異動時，另一端可以進行更新。
+
+但單向(One-Way)跟雙向(Two-Way)又是怎麼回事呢？其實就只是表示資料流向(Data flow)的不同而已。
+
+A. 從資料端出發，資料一有異動，就通知UI端更新   
+B. 從UI端出發，UI一有異動，就通知資料端更新
+
+通常現代的前端框架(包含jQuery, React, Angular)都可以時作出單向或雙向的資料綁定，所以我們不是偏頗地定義某某框架就是哪種資料綁定，而是會去描述某某框架，他容易實現哪種資料綁定。
+
+以React來說，官方文件是說：
+>React’s one-way data flow (also called one-way binding) keeps everything modular and fast.
+
+原因是React提供```state```跟```props```去做狀態的管理與屬性的傳遞，UI可以隨資料的異動去更新。
+
+```jsx
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    // 宣告state初始值
+    this.state = {date: new Date()};
+  }
+
+  componentDidMount() {
+    // 定時器
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    // 用setState更新state值
+    this.setState({
+      date: new Date()
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        {/*接收上層的屬性值*/}
+        <h1>{this.props.header}</h1>
+        <h2>It is 
+        {/*更新state後 UI就會更新*/}
+        {this.state.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(
+  <Clock header={"Hello, world!"} />,
+  document.getElementById('root')
+);
+```
+
+### Functional Programming
+隨著React 16之後，React愈來愈重視Functional Programming的撰寫方式，並且發布了Functional Component(函式型元件)、Hooks等重要更新。為什麼呢？
+
+Functional Programming是一種寫程式的方法論，並且以 **Function First** 的思維，將所有邏輯運算都包成獨立的函式，並且以組合的方式，將上一個函式的執行，當作是下一個函式的參數傳遞。
+
+寫成Functional Component有些好處，目前阿肥體會較深的是：
+- 容易測試，基本上你能為這些獨立的函式寫unit test
+- 編譯過後，會比以往的類別少更多程式碼; 沒有狀態管理下，效能通常也會較好
+
+如果要更了解Functional Programming，可以參考[2017年鐵人賽的系列文章](https://ithelp.ithome.com.tw/articles/10186465)
+
+如果理解以上這些觀念的話，恭喜你可以開始React學習之旅了🎉
 
 ## React ft. Typescript ft. Design Patterns
 
@@ -23,10 +137,17 @@
 
 [![仨人](https://img.youtube.com/vi/L8sEFu9ByaA/0.jpg)](http://www.youtube.com/watch?v=L8sEFu9ByaA "仨人")
 
+由於現在React生態系發展豐富，愈來愈多應用程式都會以React進行開發。當你Google "React Design Pattern"，你就會發現不少人已經整理出React開發的特有幾個pattern。但是，在這裡，阿肥會希望以各個設計模式的使用情境出發，當過去其他語言開發大型應用時會碰到什麼問題，用什麼模式解決，在React世界中會如何搭配他特有的語法實現，並且搭配Typescript強化對於設計模式的解釋。
+
 ## 小結
+React目前為止一直在領先的地位，衍生出來的套件更是多到數不清，現在還能寫行動端的應用。雖然不知道他還能主流多久，但是不會錯的是，React已經成為現階段的典範UI框架。Keep learning!
 
 ---
 
 ### 參考資料   
 
-- [維基百科](https://zh.wikipedia.org/wiki/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F_(%E8%AE%A1%E7%AE%97%E6%9C%BA)#%E5%88%86%E7%B1%BB)
+- [The functional side of React](https://medium.com/@andrea.chiarelli/the-functional-side-of-react-229bdb26d9a6)
+- [为什么是React－浅谈React与jQuery的思维差异](http://xunli.xyz/2016/01/16/react-vs-jquery/)
+- [一看就懂的 JSX 簡明入門教學指南](https://blog.techbridge.cc/2016/04/21/react-jsx-introduction/)
+- [Virtual DOM 概述](https://cythilya.github.io/2017/03/31/virtual-dom/)
+- [簡單聊一下 ONE-WAY DATA FLOW、TWO-WAY DATA BINDING 與前端框架](http://blog.turn.tw/?p=2948)
