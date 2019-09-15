@@ -13,7 +13,7 @@ Javascript好上手的程度就跟他熱門的程度一樣，只要google一下�
 
 但是，我想會來看這系列文章的你，應該有了什麼痛的領悟，才會下定決心看這篇的吧！
 
-Ｊavascript跟其他語言相比，雖然學習門檻低，但是卻有不少地方需要好好掌握。不然當你很開心地開發下去，最後會收到滿天飛的bug。
+Javascript跟其他語言相比，雖然學習門檻低，但是卻有不少地方需要好好掌握。不然當你很開心地開發下去，最後會收到滿天飛的bug。
 
 舉一些例子來說：
 
@@ -32,7 +32,7 @@ Javascript好上手的程度就跟他熱門的程度一樣，只要google一下�
 
 ```javascript
 // obj.js
-export var complicatedObject = {
+export var complicatedObj = {
     prop1: "...",
     prop2: 123,
     prop3: true
@@ -42,12 +42,12 @@ export var complicatedObject = {
     }, ...]
 };
 
-//func.js'
+//func.js
 import {complicatedObj} from 'obj';
 function doSomething(obj) {
-    console.log(`print string${complicatedObj.sprop1}`);
-    let a = complicatedObject.prop2+1;
-    if(complicatedObject.prop3) {
+    console.log(`print string:${complicatedObj.prop1}`);
+    let a = complicatedObj.prop2+1;
+    if(complicatedObj.prop3) {
         let b = prop4.map(item => {
             // 不知道item是什麼，執行以下這行就會報錯
             return item + a;
@@ -76,7 +76,7 @@ export var complicatedObj:I_ComplicatedObj = {
     ...
 };
 
-//func.ts'
+//func.ts
 import {complicatedObj,I_ComplicatedObj} from 'obj';
 function doSomething(obj:I_ComplicatedObj) {
     ...
@@ -108,7 +108,7 @@ doSomething(complicatedObj);
 
 疑？通常我開發完一個元件，應該只要2小時就好，現在竟然要多半小時寫各種型別的宣告?!而且還要加設定檔、加loader等等才能跑起來?! 怎麼比以前寫Javascript的時候還要麻煩？
 
-的確，不僅要先建立相關的開發環境，開始寫主程式前要先寫定義檔，有的複雜一點的型別還得先研究怎麼寫。但是阿肥只能說，
+的確，不僅要先建立相關的開發環境，開始寫主程式前要先寫定義檔，有的複雜一點的型別還得先研究怎麼寫。但是阿肥只能說：
 這就是寫強型別語言的工作日常，我們只是把爾後除錯和維護的時間挪一點點來寫型別。想要成為~~可以更早下班~~更優秀的工程師，這是一條值得走下去的學習之路。
 
 接下來的設計模式教學文，阿肥會藉由程式實例順便介紹寫Typescript的一些眉角，請敬請期待！
@@ -117,11 +117,15 @@ doSomething(complicatedObj);
 
 關係可大囉！當初在軟體開發的領域被第一次提出這些設計模式時，就是在物件導向的語言 - C++中發跡，隨後成為Java、Ｃ#等其他物件導向語言中普及，成為軟體開發人員的必備知識。
 
-設計模式的演示通常會以[UML](https://zh.wikipedia.org/zh-tw/%E7%BB%9F%E4%B8%80%E5%BB%BA%E6%A8%A1%E8%AF%AD%E8%A8%80)描述類/物件之間的關係與作用方式。有了Typescript，我們可以為物件或類別建立介面，不僅能透過UML上來解釋，更能貼近實際程式碼的產出。
+設計模式的演示通常會以[UML](https://zh.wikipedia.org/zh-tw/%E7%BB%9F%E4%B8%80%E5%BB%BA%E6%A8%A1%E8%AF%AD%E8%A8%80)描述類/物件之間的關係與作用方式。有了Typescript，不但可以讓Javascript更像物件導向語言，我們替物件或類別建立的介面，能透過UML上來解釋，更能貼近實際程式碼的產出。
 
 ## 小結   
 
-可能有些人看完還是覺得標題下得很莫名其妙XD  ~~沒錯，阿肥的確是硬掰的(被揍)~~ 阿肥認為，Typescript的出現，就像太陽一樣，讓原本黯淡都是坑的月球明亮了起來。所以，不要害怕，學就對了！
+可能有些人看完還是覺得標題下得很莫名其妙XD  ~~沒錯，阿肥的確是硬掰的(被揍)~~ 
+
+阿肥認為，Typescript的出現，就像太陽一樣，讓原本黯淡都是坑的月球明亮了起來。
+
+所以，不要害怕，學就對了！
 
 ---
 
