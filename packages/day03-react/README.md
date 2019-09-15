@@ -62,7 +62,7 @@ const CompB:React.FC<I_Props_CompB> = props => {
 A. 從資料端出發，資料一有異動，就通知UI端更新   
 B. 從UI端出發，UI一有異動，就通知資料端更新
 
-通常現代的前端框架(包含jQuery, React, Angular)都可以時作出單向或雙向的資料綁定，所以我們不是偏頗地定義某某框架就是哪種資料綁定，而是會去描述某某框架，他容易實現哪種資料綁定。
+通常現代的前端框架(包含jQuery, React, Angular)都可以實作出單向或雙向的資料綁定，所以我們不是偏頗地定義某某框架就是哪種資料綁定，而是會去描述某某框架，他容易實現哪種資料綁定。
 
 以React來說，官方文件是說：
 >React’s one-way data flow (also called one-way binding) keeps everything modular and fast.
@@ -116,12 +116,12 @@ ReactDOM.render(
 ```
 
 ### Functional Programming
-隨著React 16之後，React愈來愈重視Functional Programming的撰寫方式，並且發布了Functional Component(函式型元件)、Hooks等重要更新。為什麼呢？
+React 16之後，React愈來愈重視Functional Programming的撰寫方式，並且發布了Functional Component(函式型元件)、Hooks等重要更新。為什麼呢？
 
 Functional Programming是一種寫程式的方法論，並且以 **Function First** 的思維，將所有邏輯運算都包成獨立的函式，並且以組合的方式，將上一個函式的執行，當作是下一個函式的參數傳遞。
 
 寫成Functional Component有些好處，目前阿肥體會較深的是：
-- 容易測試，基本上你能為這些獨立的函式寫unit test
+- 容易測試，基本上能為這些獨立的函式寫unit test
 - 編譯過後，會比以往的類別少更多程式碼; 沒有狀態管理下，效能通常也會較好
 
 如果要更了解Functional Programming，可以參考[2017年鐵人賽的系列文章](https://ithelp.ithome.com.tw/articles/10186465)
@@ -137,7 +137,9 @@ Functional Programming是一種寫程式的方法論，並且以 **Function Firs
 
 [![仨人](https://img.youtube.com/vi/L8sEFu9ByaA/0.jpg)](http://www.youtube.com/watch?v=L8sEFu9ByaA "仨人")
 
-由於現在React生態系發展豐富，愈來愈多應用程式都會以React進行開發。當你Google "React Design Pattern"，你就會發現不少人已經整理出React開發的特有幾個pattern。但是，在這裡，阿肥會希望以各個設計模式的使用情境出發，當過去其他語言開發大型應用時會碰到什麼問題，用什麼模式解決，在React世界中會如何搭配他特有的語法實現，並且搭配Typescript強化對於設計模式的解釋。
+由於現在React生態系發展豐富，愈來愈多應用程式都會以React進行開發。當你Google "React Design Pattern"，你就會發現不少人已經整理出React開發的特有幾個pattern。
+
+但是在這裡，阿肥會希望以各個設計模式的使用情境出發，當過去其他語言開發大型應用時會碰到什麼問題，用什麼模式解決，在React世界中會如何用他特有的語法實現，並且搭配Typescript來強化對於設計模式的解釋。
 
 ## 小結
 React目前為止一直在領先的地位，衍生出來的套件更是多到數不清，現在還能寫行動端的應用。雖然不知道他還能主流多久，但是不會錯的是，React已經成為現階段的典範UI框架。Keep learning!
