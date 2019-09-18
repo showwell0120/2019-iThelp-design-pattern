@@ -2,7 +2,7 @@
 
 嗨 大家好 我是一路爬坡的阿肥
 
-轉眼間 中秋連假就要結束了  
+轉眼間 中秋連假結束了  
 不過很快雙十連假就可以飛去澎湖渡假啦(灑花)  
 啊 等一下(是真的突然想到)  
 那不就表示就連在澎湖也要記得發文嗎 😳
@@ -222,7 +222,7 @@ this.maker = DetectFlavor.work(flavor, color);
 - cook() ─ 烹調的方法
 - traying() - 盛盤的方法
 
-所以阿肥決定，先幫這些流程定義一個抽象(abstract)的類別，接著根據麵線顏色來做兩種流程的類別，並繼承這個抽象類別。
+所以阿肥決定，先幫這些流程定義一個 **抽象(abstract)的類別，接著根據麵線顏色來做兩種流程的類別，並繼承這個抽象類別。
 
 ```typescript
 abstract class BaseVermicelli {
@@ -235,8 +235,8 @@ abstract class BaseVermicelli {
   get vermicelli(): I_Vermicelli {
     return this._vermicelli;
   }
-  // 烹調麵線，留給繼承的類別實作
-  cook() {}
+  // 取得麵線實體，留給繼承的類別實作
+  getInstance() {}
 
   traying() {
       //... 大家都一樣的盛盤方法，可以在這裡就先寫好
@@ -250,8 +250,8 @@ class WhiteVermicelli extends BaseVermicelli {
     //...自己的備料
   }
 
-  // 實作麵線方法
-  cook() {
+  // 實作取得麵線實體的方法
+  getInstance() {
       switch (this._flavor) {
           case 'intestine':
               this._flavor = new WhiteIntestineVermicelli()
@@ -270,8 +270,8 @@ class RedVermicelli extends BaseVermicelli {
     //...自己的備料
   }
 
-  // 實作麵線方法
-  cook() {
+  // 實作取得麵線實體的方法
+  getInstance() {
       switch (this._flavor) {
           case 'intestine':
               this._flavor = new RedIntestineVermicelli()
@@ -297,7 +297,6 @@ class DetectFlavor {
         }
     }
 }
-
 ```
 
 Magic! 前場人員終於不用擔心看著一堆 if/else 跟 switch case 來決定到底要準備做哪一種麵線，工作起來也更有效率了 🎉
@@ -306,7 +305,7 @@ Magic! 前場人員終於不用擔心看著一堆 if/else 跟 switch case 來決
 
 > 定義一個建立物件的介面，但讓實現這個介面的類來決定實體化哪個類。工廠方法讓類別的實體化推遲到子類別中進行。
 
-對照阿肥的例子來看，我們建立的`BaseVermicelli`就是個**建立物件的介面**，而實現`BaseVermicelli`的`WhiteVermicelli`跟`RedVermicelli`類別，在執行的`cook()`的時候，才知道要實作哪個口味的類別。
+對照阿肥的例子來看，我們建立的`BaseVermicelli`就是個**建立物件的介面**，; 而實現`BaseVermicelli`的`WhiteVermicelli`跟`RedVermicelli`類別，在執行的`getInstance()`的時候，才知道要實作哪個口味的類別。
 
 ## 小結
 
