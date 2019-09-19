@@ -1,40 +1,24 @@
-// 麵線顏色的種類
-type T_Color = "white" | "red";
-// 麵線的口味種類，目前有大腸跟蚵仔兩種選項
-type T_Flavor = "intestine" | "oyster";
-
-// 客人的菜單內容
-export interface I_Order {
-  flavor: T_Flavor;
-  color: T_Color;
-  spoons: number;
-}
-
-// 最後給客人的麵線組成
-export interface I_Vermicelli extends I_Order {
-  trayed: boolean;
-  content: string[];
-}
+/// <reference path="declaration.ts" />
 
 // 抽象類別
 abstract class BaseVermicelli {
-  vermicelli: I_Vermicelli = {
+  vermicelli: Declaration.I_Vermicelli = {
     content: [],
     trayed: false,
     spoons: 0,
     flavor: null,
     color: null
   };
-  flavor: T_Flavor;
+  flavor: Declaration.T_Flavor;
   spoons: number;
-  constructor(order: I_Order) {
+  constructor(order: Declaration.I_Order) {
     //... 大家都有的備料過程 e.g. 準備大腸或蚵仔
     this.flavor = order.flavor;
     this.spoons = order.spoons;
   }
 
   // 取得麵線實體，留給繼承的類別實作
-  getInstance() {}
+  getInstance() { }
 
   traying() {
     //... 大家都一樣的盛盤方法，可以在這裡就先寫好
@@ -137,9 +121,9 @@ class RedVermicelli extends BaseVermicelli {
 
 // 前場人員的類別
 class FrontStaff {
-  contructor() {}
+  contructor() { }
   // 判斷麵線顏色，將口味傳遞給類別並實作
-  work(order: I_Order) {
+  work(order: Declaration.I_Order) {
     switch (order.color) {
       case "white":
         return new WhiteVermicelli(order);
@@ -159,10 +143,10 @@ export class VermicelliFactory {
   // 兩種製作方式
   maker: WhiteVermicelli | RedVermicelli = null;
 
-  constructor() {}
+  constructor() { }
 
   // 收到菜單後的流程
-  public receiveOrder(order: I_Order) {
+  public receiveOrder(order: Declaration.I_Order) {
     this.maker = this.frontStaff.work(order);
     this.maker.getInstance();
     this.maker.traying();

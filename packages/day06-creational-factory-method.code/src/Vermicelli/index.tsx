@@ -1,9 +1,11 @@
+/// <reference path="declaration.ts" />
+
 import * as React from "react";
-import { VermicelliFactory, I_Order, I_Vermicelli } from "./VermicelliFactory";
+import { VermicelliFactory } from "./factory";
 
 interface I_Props_FatVermicelli {
   // 當麵線完成後，再交給外面的人
-  onSubmit: (v: I_Vermicelli) => void;
+  onSubmit: (v: Declaration.I_Vermicelli) => void;
 }
 
 // 建立Functional Component，props的型別傳入I_Props_FatVermicelli
@@ -12,7 +14,7 @@ export const FatVermicelli: React.FC<I_Props_FatVermicelli> = ({
 }) => {
   const vermicelliFactory = new VermicelliFactory();
 
-  const [order, setOrder] = React.useState<I_Order>({
+  const [order, setOrder] = React.useState<Declaration.I_Order>({
     color: "red",
     flavor: "intestine",
     spoons: 1
@@ -28,8 +30,6 @@ export const FatVermicelli: React.FC<I_Props_FatVermicelli> = ({
 
   // 表單元件的change handler
   const handleFieldChange = ({ target }) => {
-    console.log("TCL: target.name", target.name);
-    console.log("TCL: target.value", target.value);
     setOrder(order => ({
       ...order,
       [target.name]: target.value
