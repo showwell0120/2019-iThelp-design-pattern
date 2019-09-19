@@ -1,4 +1,4 @@
-# [Day5] 老闆：來一碗大腸麵線 ─ 工廠方法(Factory Method)<上>
+# [Day5] 老闆：來一碗大腸麵線 ─ 工廠方法(Factory Method) <模式篇>
 
 嗨 大家好 我是一路爬坡的阿肥
 
@@ -276,9 +276,9 @@ Magic! 前場人員終於不用擔心看著一堆 if/else 跟 switch case 來決
 
 [![開心餐廳](https://img.youtube.com/vi/oXTPEJwXEjc/0.jpg)](http://www.youtube.com/watch?v=oXTPEJwXEjc "開心餐廳")
 
-今天的範例程式會在 [github](https://github.com/showwell0120/Design-Pattern-Typescript-React) 的 `packages/src/day5-creational-factory-method`  
-想要看如何用 React demo 的話可以看`src/Vermicelli`的 source code  
-執行`yarn story`，打開`localhost:6006` 可以看 demo 的 UI，有興趣的話可以再下載來試試看吧！
+今天的程式實作會在 [github](https://github.com/showwell0120/Design-Pattern-Typescript-React) 的 `packages/src/day6-creational-factory-method.code`
+
+明天會介紹怎麼用 Typescript 加上 React 實作阿肥麵線店，有興趣的話可以先下載專案預習喔！
 
 ---
 
