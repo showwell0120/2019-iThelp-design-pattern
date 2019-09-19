@@ -1,4 +1,4 @@
-# [Day5] 老闆：來一碗大腸麵線 ─ 工廠方法(Factory Method)
+# [Day5] 老闆：來一碗大腸麵線 ─ 工廠方法(Factory Method)<上>
 
 嗨 大家好 我是一路爬坡的阿肥
 
@@ -23,15 +23,16 @@
 // 麵線的口味種類，目前有大腸跟蚵仔兩種選項
 type T_Flavor = "intestine" | "oyster";
 
-// 麵線的組成
-interface I_Vermicelli {
-  flavor: T_Flavor;
-}
-
 // 客人的菜單組成，紀錄口味跟需要附幾支湯匙
 interface I_Order {
   flavor?: T_Flavor;
   spoon?: number;
+}
+
+// 最後給客人的麵線組成
+export interface I_Vermicelli extends I_Order {
+  trayed: boolean;
+  content: string[];
 }
 ```
 
@@ -40,70 +41,45 @@ interface I_Order {
 ```typescript
 // 做大腸麵線的流程
 class IntestineVermicelli {
-  private _vermicelli: I_Vermicelli;
+  vermicelli: I_Vermicelli = {
+    //...
+  };
   constructor(props) {
     //...備料
   }
-  get vermicelli(): I_Vermicelli {
-    return this._vermicelli;
-  }
+
   // 準備麵線
   cook() {
-    // this._vermcelli = ...
+    // ...
   }
+
   // 盛盤
   traying() {
-    // this._vermcelli = ...
+    // ...
   }
 }
 
 // 做蚵仔麵線的流程
 class OysterVermicelli {
-  private _vermicelli: I_Vermicelli;
-  constructor(props) {
-    //...備料
-  }
-  get vermicelli(): I_Vermicelli {
-    return this._vermicelli;
-  }
-  // 準備麵線
-  cook() {
-    // this._vermicelli = ...
-  }
-  // 盛盤
-  traying() {
-    // this._vermicelli = ...
-  }
+  //...
 }
 
 // 收到菜單的流程
-class VermicelliStore {
-  order: I_Order = {
-    flavor: "intestine",
-    spoon: 1
-  };
-
-  // 後場人員目前會兩種製作方式
-  maker: OysterVermicelli | IntestineVermicelli;
+class VermicelliFactory {
+  // 兩種製作方式
+  maker: OysterVermicelli | IntestineVermicelli = null;
 
   constructor() {}
 
   // 收到菜單後的流程，結果要傳回麵線的實體
   public static receiveOrder(order: I_Order): I_Vermicelli {
-    // 內定有預設的菜單選項，如果客人沒填就走預設選項
-    this.order = { ...this.order, ...order };
-
-    const { flavor } = this.order;
-
     // 用if/else 決定要做哪種麵線
-    if (flavor == "intestine") this.maker = new IntestineVermicelli();
-    else if (flavor == "oyster") this.maker = new OysterVermicelli();
+    if (order.flavor == "intestine") this.maker = new IntestineVermicelli();
+    else if (order.flavor == "oyster") this.maker = new OysterVermicelli();
 
     // 每種麵線都有各自烹飪和盛盤的方法
     this.maker.cook();
     this.maker.traying();
-
-    return this.maker.vermicelli;
   }
 }
 ```
@@ -120,34 +96,35 @@ class VermicelliStore {
 
 ```typescript
 // 新增前場人員要做的流程
-class DetectFlavor {
-    contructor() { }
-    // 用switch減少巢狀if/else
-    pubic static work(flavor: T_Flavor):I_Vermicelli {
-        switch (flavor) {
-            case 'intestine':
-                return new IntestineVermicelli();
-            case 'oyster':
-                return new OysterVermicelli();
-            default:
-                return null;
-        }
+class FrontStaff {
+  contructor() {}
+  // 用switch減少巢狀if/else
+  work(order): I_Vermicelli {
+    switch (order.flavor) {
+      case "intestine":
+        return new IntestineVermicelli();
+      case "oyster":
+        return new OysterVermicelli();
+      default:
+        return null;
     }
+  }
 }
 
-class VermicelliStore {
-  //...
+class VermicelliFactory {
+  // 雇用前場人員
+  frontStaff = new FrontStaff();
   //...
   public static receiveOrder(order: I_Order): I_Vermicelli {
     //...
     // 把決定要做哪種麵線交給前場人員執行
-    this.maker = DetectFlavor.work(flavor);
+    this.maker = this.frontStaff.work(order);
     //...
   }
 }
 ```
 
-`DetectFlavor`這個類別，把決定要哪個口味的麵線的流程封裝(encapsulate)起來，外面的人只要知道最後的結果是什麼就好，這種就叫做 **簡單工廠**。這在 Web 前端開發中是蠻常應用的模式，因為建立物件的邏輯通常沒那麼複雜，用簡單工廠就能實現。
+`FrontStaff`這個類別，把決定要哪個口味的麵線的流程封裝(encapsulate)起來，外面的人只要知道最後的結果是什麼就好，這種就叫做 **簡單工廠**。這在 Web 前端開發中是蠻常應用的模式，因為建立物件的邏輯通常沒那麼複雜，用簡單工廠就能實現。
 
 ## 紅麵線跟白麵線
 
@@ -159,15 +136,10 @@ class VermicelliStore {
 // 多一個麵線顏色的種類
 type T_Color = "white" | "red";
 
-// 麵線的組成
-interface I_Vermicelli {
-  flavor: T_Flavor;
+// 菜單多一個顏色選項
+interface I_Order {
+  //...
   color: T_Color;
-}
-
-// 菜單組成再多一個選擇麵線顏色，我們直接繼承 I_Vermicelli這個介面
-interface I_Order extends I_Vermicelli {
-  spoon?: number;
 }
 
 // 白麵線的大腸口味的流程
@@ -180,10 +152,10 @@ class WhiteOysterVermicelli {
     // ...
 }
 
-class DetectFlavor {
+class FrontStaff {
     contructor() { }
     // 先判斷麵線顏色，再決定口味
-    pubic static work(flavor: T_Flavor, color: T_Color):I_Vermicelli {
+    pubic static work({flavor, color}) {
         if(color == 'white') {
             switch (flavor) {
                 case 'intestine':
@@ -206,11 +178,9 @@ class DetectFlavor {
     }
 }
 
-// 要多傳一個麵線顏色的參數給 DetectFlavor
-this.maker = DetectFlavor.work(flavor, color);
 ```
 
-阿肥突然發現不對勁：只是多一個麵線顏色的選擇，不但要多兩個製造的流程類別，在`DetectFlavor`中還要多一個 if/else 來判斷，對前場人員來講負擔太重了。顯然簡單工廠已經無法滿足阿肥現在的需求了！
+阿肥突然發現不對勁：只是多一個麵線顏色的選擇，不但要多兩個製造的流程類別，在`FrontStaff`中還要多一個 if/else 來判斷，對前場人員來講負擔太重了。顯然簡單工廠已經無法滿足阿肥現在的需求了！
 
 ## 工廠方法
 
@@ -222,7 +192,7 @@ this.maker = DetectFlavor.work(flavor, color);
 - cook() ─ 烹調的方法
 - traying() - 盛盤的方法
 
-所以阿肥決定，先幫這些流程定義一個 **抽象(abstract)的類別，接著根據麵線顏色來做兩種流程的類別，並繼承這個抽象類別。
+所以阿肥決定，先幫這些流程定義一個 \*\*抽象(abstract)的類別，接著根據麵線顏色來做兩種流程的類別，並繼承這個抽象類別。
 
 ```typescript
 abstract class BaseVermicelli {
@@ -239,63 +209,51 @@ abstract class BaseVermicelli {
   getInstance() {}
 
   traying() {
-      //... 大家都一樣的盛盤方法，可以在這裡就先寫好
+    //... 大家都一樣的盛盤方法，可以在這裡就先寫好
   }
 }
 
 class WhiteVermicelli extends BaseVermicelli {
-  constructor(props) {
+  constructor(order) {
     // 初始化，先做大家都會有的備料過程
-    super(props);
+    super(order);
     //...自己的備料
   }
+  //實作大腸麵線
+  intestineFlavor() {}
+  //實作蚵仔麵線
+  oysterFlavor() {}
 
   // 實作取得麵線實體的方法
   getInstance() {
-      switch (this._flavor) {
-          case 'intestine':
-              this._flavor = new WhiteIntestineVermicelli()
-          case 'oyster':
-              this._flavor = new WhiteOysterVermicelli()
-          default:
-              break;
-      }
+    switch (this.flavor) {
+      case "intestine":
+        this.flavor = this.intestineFlavor();
+      case "oyster":
+        this.flavor = this.oysterFlavor();
+      default:
+        break;
+    }
   }
 }
 
 class RedVermicelli extends BaseVermicelli {
-  constructor(props) {
-    // 初始化，先做大家都會有的備料過程
-    super(props);
-    //...自己的備料
-  }
-
-  // 實作取得麵線實體的方法
-  getInstance() {
-      switch (this._flavor) {
-          case 'intestine':
-              this._flavor = new RedIntestineVermicelli()
-          case 'oyster':
-              this._flavor = new RedOysterVermicelli()
-          default:
-              break;
-      }
-  }
+  //...
 }
 
-class DetectFlavor {
-    contructor() { }
-    // 判斷麵線顏色，將口味傳遞給類別並實作
-    pubic static work(flavor: T_Flavor, color: T_Color):I_Vermicelli {
-        switch (color) {
-            case 'white':
-                return new WhiteVermicelli(flavor);
-            case 'red':
-                return new RedVermicelli(flavor);
-            default:
-                return null;
-        }
+class FrontStaff {
+  contructor() {}
+  // 判斷麵線顏色，將口味傳遞給類別並實作
+  work(order: I_Order) {
+    switch (color) {
+      case "white":
+        return new WhiteVermicelli(order);
+      case "red":
+        return new RedVermicelli(order);
+      default:
+        return null;
     }
+  }
 }
 ```
 
@@ -305,7 +263,7 @@ Magic! 前場人員終於不用擔心看著一堆 if/else 跟 switch case 來決
 
 > 定義一個建立物件的介面，但讓實現這個介面的類來決定實體化哪個類。工廠方法讓類別的實體化推遲到子類別中進行。
 
-對照阿肥的例子來看，我們建立的`BaseVermicelli`就是個**建立物件的介面**，; 而實現`BaseVermicelli`的`WhiteVermicelli`跟`RedVermicelli`類別，在執行的`getInstance()`的時候，才知道要實作哪個口味的類別。
+對照阿肥的例子來看，我們建立的`BaseVermicelli`就是個**建立物件的介面**，; 而實現`BaseVermicelli`的`WhiteVermicelli`跟`RedVermicelli`類別，在執行的`getInstance()`的時候，才知道要實作哪個口味。
 
 ## 小結
 
