@@ -265,6 +265,14 @@ Magic! 前場人員終於不用擔心看著一堆 if/else 跟 switch case 來決
 
 對照阿肥的例子來看，我們建立的`BaseVermicelli`就是個**建立物件的介面**，; 而實現`BaseVermicelli`的`WhiteVermicelli`跟`RedVermicelli`類別，在執行的`getInstance()`的時候，才知道要實作哪個口味。
 
+今天這個故事，我們用了簡單工廠(Simple Factory)跟工廠方法(Factory Method)來改善阿肥生產麵線的流程。其實工廠模式另外一種更進階的模式：抽象工廠(Abstract Factory)。
+
+![工廠模式](https://i.imgur.com/QAoTrAn.png)
+
+抽象工廠是針對規模更大，每個物件的屬性邏輯更複雜時，再為這些屬性製作工廠，讓生產物件的工廠組成再抽出為抽象類別。
+
+這部分就等阿肥到全世界展店，我們再幫他用抽象工廠解決吧！
+
 ## 小結
 
 現在，阿肥的生意興隆，面對各種挑戰也更積極了！
