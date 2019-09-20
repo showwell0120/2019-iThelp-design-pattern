@@ -5,7 +5,7 @@
 突然想到雙十連假要去澎湖渡假
 敲開心～(灑花)  
 啊 等一下！(是真的突然想到)  
-那不就表示就連在澎湖也要記得發文嗎 😳
+那不就表示就連在澎湖也要記得發文嗎 ?![/images/emoticon/emoticon06.gif](/images/emoticon/emoticon06.gif)
 
 ---
 
@@ -13,7 +13,7 @@
 
 小肥工作幾年後，終於存到了圓夢基金，在附近廟口開一家麵線店，希望可以看到每位客人吃完麵線後滿足的笑容。
 
-小肥只會做簡單的滷大腸跟處理蚵仔，所以目前只有大腸麵線跟蚵仔麵線。客人只要在菜單上勾哪一個，並且交給小肥，稍等片待就可以拿到熱騰騰的麵線了。
+小肥只會做簡單的滷大腸跟處理蚵仔，所以目前只有大腸麵線跟蚵仔麵線。客人只要填寫菜單，並且交給小肥，稍等片待就可以拿到熱騰騰的麵線了。
 
 然而，這兩種麵線看似作法都差不多，卻有他的堅持，所以兩種麵線加的佐料會不太一樣，兩種吃起來各有其風味。
 
@@ -80,6 +80,8 @@ class VermicelliFactory {
     // 每種麵線都有各自烹飪和盛盤的方法
     this.maker.cook();
     this.maker.traying();
+
+    return this.maker.vermicelli;
   }
 }
 ```
@@ -124,7 +126,7 @@ class VermicelliFactory {
 }
 ```
 
-`FrontStaff`這個類別，把決定要哪個口味的麵線的流程封裝(encapsulate)起來，外面的人只要知道最後的結果是什麼就好，這種就叫做 **簡單工廠**。這在 Web 前端開發中是蠻常應用的模式，因為建立物件的邏輯通常沒那麼複雜，用簡單工廠就能實現。
+`FrontStaff`這個類別，把決定要哪個口味的麵線的流程 **封裝(encapsulate)** 起來，外面的人只要知道最後的結果是什麼就好，這種就叫做 **簡單工廠**。這在 Web 前端開發中是蠻常應用的模式，因為建立物件的邏輯通常沒那麼複雜，用簡單工廠就能實現。
 
 ## 紅麵線跟白麵線
 
@@ -155,7 +157,7 @@ class WhiteOysterVermicelli {
 class FrontStaff {
     contructor() { }
     // 先判斷麵線顏色，再決定口味
-    pubic static work({flavor, color}) {
+    work({flavor, color}) {
         if(color == 'white') {
             switch (flavor) {
                 case 'intestine':
@@ -184,27 +186,17 @@ class FrontStaff {
 
 ## 工廠方法
 
-小肥回過頭看這紅麵線跟白麵線的流程，發現他們都有相似的結構：
-
-- 都有大腸跟蚵仔兩個口味
-- contructor - 進行備料
-- vermicelli 的 getter ─ 取得已經完成的麵線
-- cook() ─ 烹調的方法
-- traying() - 盛盤的方法
-
-所以小肥決定，先幫這些流程定義一個 \*\*抽象(abstract)的類別，接著根據麵線顏色來做兩種流程的類別，並繼承這個抽象類別。
+小肥回過頭看這紅麵線跟白麵線的流程，發現雖然內容不同，可是流程是相似的，所以小肥決定，先幫這些流程定義一個 **抽象(abstract)** 的類別，然後根據麵線顏色建立這兩種流程的類別，來繼承這個抽象類別。
 
 ```typescript
 abstract class BaseVermicelli {
-  private _vermicelli: I_Vermicelli;
-  private _flavor: T_Flavor;
+  vermicelli: I_Vermicelli;
+  flavor: T_Flavor;
   constructor(props: T_Flavor) {
-    //... 大家都有的備料過程 e.g. 準備大腸或蚵仔
-    this._flavor = props;
+    ///... 大家都有的備料過程 e.g. 準備大腸或蚵仔
+    this.flavor = order.flavor;
   }
-  get vermicelli(): I_Vermicelli {
-    return this._vermicelli;
-  }
+
   // 取得麵線實體，留給繼承的類別實作
   getInstance() {}
 
@@ -257,15 +249,15 @@ class FrontStaff {
 }
 ```
 
-Magic! 前場人員終於不用擔心看著一堆 if/else 跟 switch case 來決定到底要準備做哪一種麵線，工作起來也更有效率了 🎉
+Magic! 前場人員終於不用擔心看著一堆 if/else 跟 switch case 來決定到底要準備做哪一種麵線，工作起來也更有效率了 ?
 
 我們看工廠方法的維基百科解釋：
 
 > 定義一個建立物件的介面，但讓實現這個介面的類來決定實體化哪個類。工廠方法讓類別的實體化推遲到子類別中進行。
 
-對照肥老闆的例子來看，我們建立的`BaseVermicelli`就是個**建立物件的介面**，; 而實現`BaseVermicelli`的`WhiteVermicelli`跟`RedVermicelli`類別，在執行的`getInstance()`的時候，才知道要實作哪個口味。
+對照小肥的例子來看，我們建立的`BaseVermicelli`就是個**建立物件的介面**，; 而實現`BaseVermicelli`的`WhiteVermicelli`跟`RedVermicelli`類別，在執行的`getInstance()`的時候，才知道要實作哪個口味。
 
-今天這個故事，我們用了簡單工廠(Simple Factory)跟工廠方法(Factory Method)來改善小肥生產麵線的流程。其實工廠模式另外一種更進階的模式：抽象工廠(Abstract Factory)。
+今天這個故事，我們用了簡單工廠(Simple Factory)跟工廠方法(Factory Method)來改善小肥生產麵線的流程。其實工廠模式還有更進階的模式：抽象工廠(Abstract Factory)。
 
 ![工廠模式](https://i.imgur.com/QAoTrAn.png)
 
