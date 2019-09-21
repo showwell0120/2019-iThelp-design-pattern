@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Copier, I_CopierItem } from './prototype'
+import { Copier } from './prototype'
 
 export interface I_Props_ReportCopier { }
 
@@ -16,9 +16,6 @@ interface I_Output {
 }
 
 export const ReportCopier: React.FC<I_Props_ReportCopier> = props => {
-    let reportARef = React.useRef<HTMLDivElement>(null);
-    let reportBRef = React.useRef<HTMLDivElement>(null);
-
     const [setting, setSetting] = React.useState<I_Setting>({
         reportA: 1,
         reportB: 1
@@ -39,14 +36,7 @@ export const ReportCopier: React.FC<I_Props_ReportCopier> = props => {
     const handleSubmit = e => {
         e.preventDefault();
 
-        let items: I_CopierItem[] = [{
-            fileName: 'A',
-            el: reportARef.current
-        }, {
-            fileName: 'B',
-            el: reportBRef.current
-        }]
-        const reportCopier = new Copier(items);
+        const reportCopier = new Copier(['A', 'B']);
         let copiedReportAList: string[] = [];
         for (let i = 0; i < setting.reportA; i++) {
             let clonedA = reportCopier.createOne("A");
@@ -66,41 +56,24 @@ export const ReportCopier: React.FC<I_Props_ReportCopier> = props => {
     }
 
     return <div>
-        <div className="reports">
-            <div className="report" ref={reportARef}>
-                <h3>A標題</h3>
-                <p>A內文A內文A內文A內文A內文A內文A內文A內文A內文</p>
-            </div>
-            <div className="report" ref={reportBRef}>
-                <h3>B標題</h3>
-                <p>B內文B內文B內文B內文B內文B內文B內文B內文B內文</p>
-            </div>
-        </div>
         <div className="setting">
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="reportA">reportA 份數：</label>
-                    <input type="number" name="reportA" value={setting.reportA} onChange={handleFieldChange} />
-                </div>
-                <div>
-                    <label htmlFor="reportB">reportB 份數：</label>
-                    <input type="number" name="reportB" value={setting.reportB} onChange={handleFieldChange} />
-                </div>
-                <div><input type="submit" value="啟動"></input></div>
+                <label htmlFor="reportA">reportA 份數：</label>
+                <input type="number" min={0} name="reportA" value={setting.reportA} onChange={handleFieldChange} />
+                <label htmlFor="reportB">reportB 份數：</label>
+                <input type="number" min={0} name="reportB" value={setting.reportB} onChange={handleFieldChange} />
+                <input type="submit" value="啟動"></input>
             </form>
         </div>
         <div className="output">
-            <h2>reportA</h2>
+            <h3>output</h3>
             <div>{output.reportA && output.reportA.length && output.reportA.map(copied => {
-                return <div dangerouslySetInnerHTML={{ __html: copied }}></div>
+                return <div style={{ border: '1px solid #bdbdbd' }} dangerouslySetInnerHTML={{ __html: copied }}></div>
             })}</div>
-            <hr />
-            <h2>reportB</h2>
             <div>{output.reportB && output.reportB.length && output.reportB.map(copied => {
-                return <div dangerouslySetInnerHTML={{ __html: copied }}></div>
+                return <div style={{ border: '1px solid #bdbdbd' }} dangerouslySetInnerHTML={{ __html: copied }}></div>
             })}</div>
-            <hr />
         </div>
-    </div>
+    </div >
 
 }
