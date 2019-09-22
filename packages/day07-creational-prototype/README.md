@@ -45,31 +45,31 @@
 
 拿複印機的運作轉為程式來看：
 
-- 產生顯影的介面定義了 `clone()`，回傳的結果要是 `OutputPrototype`
+- 產生顯影的介面定義了 `clone()`，回傳的結果要是 `I_OutputPrototype`
 - 實作介面的 `OutputReportA`、`OutputReportB`、`OutputReportC`的類別，實作各自的 `clone()`，結果是回傳自己的實體
 - 複印機本身是主程式， 執行 `createOne()`的話，可以呼叫實體物件的`clone()`進行複製
 
 以Typescript來演示以上說明的話：
 ```typescript
 // 產生顯影的介面
-interface OutputPrototype {
-    clone(): OutputPrototype;
+interface I_OutputPrototype {
+    clone(): I_OutputPrototype;
 }
 
 // 實作介面的類別
 namespace OutputClass {
-    export class OutputReportA implements OutputPrototype {
-        clone(): OutputPrototype {
+    export class OutputReportA implements I_OutputPrototype {
+        clone(): I_OutputPrototype {
         return new OutputReportA();
         }
         // ...
     }
 
-    export class OutputReportB implements OutputPrototype {
+    export class OutputReportB implements I_OutputPrototype {
         //...
     }
 
-    export class OutputReportC implements OutputPrototype {
+    export class OutputReportC implements I_OutputPrototype {
         //...
     }
 }

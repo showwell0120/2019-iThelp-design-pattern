@@ -11,10 +11,11 @@ beforeEach(() => {
 
 //提取重複程式
 const render = component => ReactDOM.render(component, container);
+const form = (id: string) => container.querySelector(`form[id="${id}"]`);
 
 describe("ReportCopier", () => {
   it("render ReportCopier", () => {
     render(<ReportCopier />);
-
+    expect(form("setting")).not.toBeNull();
   });
 });

@@ -11,11 +11,11 @@
 **今日文章適合搭配[範例專案](https://github.com/showwell0120/Design-Pattern-Typescript-React)的`packages/day08-creational-prototype.code`一起搭配觀看，歡迎把專案clone下來喔**
 
 ## 定義物件共有的介面   
-我們為這個物件共有的介面 `OutputPrototype` 定義了一個 `clone()`，並且指定的回傳也要是依 `OutputPrototype` 介面實作的實體。另外我們為了這個例子再多一個 `getInnerHTML()` 定義轉印出來的方法。
+我們為這個物件共有的介面 `I_OutputPrototype` 定義了一個 `clone()`，並且指定的回傳也要是依 `I_OutputPrototype` 介面實作的實體。另外我們為了這個例子再多一個 `getInnerHTML()` 定義轉印出來的方法。
 ```typescript
 namespace PrototypeDeclaration {
-    export interface OutputPrototype {
-        clone(): OutputPrototype;
+    export interface I_OutputPrototype {
+        clone(): I_OutputPrototype;
         getInnerHTML(): string
     }
 }
@@ -32,7 +32,7 @@ namespace PrototypeClass {
         subject: string;
     }
 
-    export class OutputReportA extends implements PrototypeDeclaration.OutputPrototype {
+    export class OutputReportA extends implements PrototypeDeclaration.I_OutputPrototype {
         reportData:I_I_ReportData = null;
         constructor() {
             super();
@@ -43,12 +43,12 @@ namespace PrototypeClass {
             }
         }
 
-        clone(): PrototypeDeclaration.OutputPrototype {
+        clone(): PrototypeDeclaration.I_OutputPrototype {
             return new OutputReportA();
         }
     }
 
-    export class OutputReportB extends implements PrototypeDeclaration.OutputPrototype {
+    export class OutputReportB extends implements PrototypeDeclaration.I_OutputPrototype {
         reportData:I_I_ReportData = null;
         constructor() {
             super();
@@ -59,18 +59,18 @@ namespace PrototypeClass {
             }
         }
 
-        clone(): PrototypeDeclaration.OutputPrototype {
+        clone(): PrototypeDeclaration.I_OutputPrototype {
             return new OutputReportB();
         }
     }
 }
 ```
 
-這兩個類別除了文字內容不一樣以外，同樣的都是需要實作 `OutputPrototype` 的介面、實作 `clone()`，還有最後轉印到紙上的部分。如果有好好看過本系列第5、6天的文章的話可能就會想到：「嘿！我們還可以用工廠方法為這兩個類別再建立一個工廠」
+這兩個類別除了文字內容不一樣以外，同樣的都是需要實作 `I_OutputPrototype` 的介面、實作 `clone()`，還有最後轉印到紙上的部分。如果有好好看過本系列第5、6天的文章的話可能就會想到：「嘿！我們還可以用工廠方法為這兩個類別再建立一個工廠」
 
 ```typescript
 // 工廠方法 實作抽象類別
-abstract class OutputReport implements PrototypeDeclaration.OutputPrototype {
+abstract class OutputReport implements PrototypeDeclaration.I_OutputPrototype {
     reportData: I_ReportData = null;
 
     constructor() { }
@@ -101,7 +101,7 @@ export class OutputReportA extends OutputReport {
         }
     }
 
-    clone(): PrototypeDeclaration.OutputPrototype {
+    clone(): PrototypeDeclaration.I_OutputPrototype {
         return new OutputReportA();
     }
 }
@@ -119,7 +119,7 @@ export class OutputReportA extends OutputReport {
 
 ```typescript
 export class Copier {
-    private outputPrototypeMap: { [s: string]: PrototypeDeclaration.OutputPrototype } = {};
+    private outputPrototypeMap: { [s: string]: PrototypeDeclaration.I_OutputPrototype } = {};
 
     constructor(fileList: string[]) {
         let me = this;
@@ -128,7 +128,7 @@ export class Copier {
         }
     }
 
-    createOne(s: string): PrototypeDeclaration.OutputPrototype {
+    createOne(s: string): PrototypeDeclaration.I_OutputPrototype {
         return this.outputPrototypeMap[s].clone();
     }
 }

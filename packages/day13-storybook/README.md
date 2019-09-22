@@ -1,4 +1,4 @@
-# [Day13] Storybook
+# [Day13] 前端開發好朋友 ─ Storybook
 
 嗨 大家好 我是一路爬坡的阿肥
 

@@ -57,7 +57,7 @@ export const ReportCopier: React.FC<I_Props_ReportCopier> = props => {
 
     return <div>
         <div className="setting">
-            <form onSubmit={handleSubmit}>
+            <form id="setting" onSubmit={handleSubmit}>
                 <label htmlFor="reportA">reportA 份數：</label>
                 <input type="number" min={0} name="reportA" value={setting.reportA} onChange={handleFieldChange} />
                 <label htmlFor="reportB">reportB 份數：</label>

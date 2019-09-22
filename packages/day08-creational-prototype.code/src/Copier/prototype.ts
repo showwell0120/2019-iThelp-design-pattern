@@ -7,7 +7,7 @@ namespace PrototypeClass {
         subject: string;
     }
 
-    abstract class OutputReport implements PrototypeDeclaration.OutputPrototype {
+    abstract class OutputReport implements PrototypeDeclaration.I_OutputPrototype {
         reportData: I_ReportData = null;
 
         constructor() { }
@@ -38,7 +38,7 @@ namespace PrototypeClass {
             }
         }
 
-        clone(): PrototypeDeclaration.OutputPrototype {
+        clone(): PrototypeDeclaration.I_OutputPrototype {
             return new OutputReportA();
         }
     }
@@ -53,14 +53,14 @@ namespace PrototypeClass {
             }
         }
 
-        clone(): PrototypeDeclaration.OutputPrototype {
+        clone(): PrototypeDeclaration.I_OutputPrototype {
             return new OutputReportB();
         }
     }
 }
 
 export class Copier {
-    private outputPrototypeMap: { [s: string]: PrototypeDeclaration.OutputPrototype } = {};
+    private outputPrototypeMap: { [s: string]: PrototypeDeclaration.I_OutputPrototype } = {};
 
     constructor(fileList: string[]) {
         let me = this;
@@ -69,7 +69,7 @@ export class Copier {
         }
     }
 
-    createOne(s: string): PrototypeDeclaration.OutputPrototype {
+    createOne(s: string): PrototypeDeclaration.I_OutputPrototype {
         return this.outputPrototypeMap[s].clone();
     }
 }

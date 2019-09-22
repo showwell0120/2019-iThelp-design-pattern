@@ -1,6 +1,6 @@
 namespace PrototypeDeclaration {
-    export interface OutputPrototype {
-        clone(): OutputPrototype;
+    export interface I_OutputPrototype {
+        clone(): I_OutputPrototype;
         getInnerHTML(): string;
     }
 }
