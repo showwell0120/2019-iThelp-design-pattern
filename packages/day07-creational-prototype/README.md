@@ -101,7 +101,7 @@ class Copier {
 > 跌跌撞撞 依然很瘋狂   
 > ─《遍地開花》
 
-[![遍地開花](https://img.youtube.com/vi/NGbnRoL26CA/0.jpg)](http://www.youtube.com/watch?v=oXTPEJwXEjc "NGbnRoL26CA")
+[![遍地開花](https://img.youtube.com/vi/NGbnRoL26CA/0.jpg)](http://www.youtube.com/watch?v=NGbnRoL26CA "遍地開花")
 
 今天的程式實作會在 [github](https://github.com/showwell0120/Design-Pattern-Typescript-React) 的 `packages/src/day8-creational-prototype.code`
 

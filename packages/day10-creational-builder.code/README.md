@@ -1,16 +1,27 @@
-# [Day10] 吃一蘭就是要超濃湯頭加半熟蛋 ─ 建設者(Builder) <實作篇>
+# [Day10] 吃一嵐就是要硬麵加半熟蛋 ─ 建設者(Builder) <實作篇>
 
 嗨 大家好 我是一路爬坡的阿肥
 
 ---
 
-##
+## 型別跟定義
 
-##
+## Builder 類別
 
-##
+## Director 類別
 
-##
+## 一嵐拉麵店 開幕囉！
+
+## Storybook跑起來
+執行`yarn story`後，開啟`http://localhost:6006`，然後切到`IChiRanRamen`，就可以看到畫面了。
+
+選擇建議的選項設定的結果畫面
+
+![storybook 1](https://i.imgur.com/GAEojx8.png)
+
+客製輸入選項設定的結果畫面
+
+![storybook 2](https://i.imgur.com/wyEMKp4.png)
 
 ## 小結
 
