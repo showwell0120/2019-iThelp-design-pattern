@@ -1,10 +1,15 @@
-# [Day11] 每次以為搶到門票結果氣氣氣氣氣！ ─ 獨體(Singleton) <模式篇>
+# [Day11] 每次以為搶到門票結果氣氣氣氣氣！ ─ 獨體(Singleton)
 
 嗨 大家好 我是一路爬坡的阿肥
 
+今天的文章對阿肥來說好輕鬆呀~  
+不用寫太多範例程式  
+而且看到題目的第一眼就瞬間想到歌  
+如果接下來每個模式都那麼好懂就好了(不可能)
+
 ---
 
-##
+## 情境描述
 
 ##
 
@@ -14,8 +19,14 @@
 
 ## 小結
 
----
+看完之後來聽點有感覺的歌吧！
+
+> 妳就是我的唯一　　  
+> 獨自對著電話說我愛你  
+> 《唯一》
+
+## [![唯一](https://img.youtube.com/vi/P7Qv4AV_StM/0.jpg)](http://www.youtube.com/watch?v=P7Qv4AV_StM "唯一")
 
 ### 參考資料
 
-- [維基百科](<https://zh.wikipedia.org/wiki/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F_(%E8%AE%A1%E7%AE%97%E6%9C%BA)#%E5%88%86%E7%B1%BB>)
+- [guru - singleton](https://refactoring.guru/design-patterns/singleton)
