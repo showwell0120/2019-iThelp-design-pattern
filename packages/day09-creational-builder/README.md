@@ -39,30 +39,26 @@
 
 肥肥為了新手服務生新增一個類別 `RamenDirector`。只要是勾選“請給我建議的選項設定”的點單，就給新手服務生處理。只要呼叫 `buildDefaultRamen()`，就會自動帶入建議選項執行一連串的設定
 ```typescript
-class RamenDirector {
+export class RamenDirector {
     private builder: RamenBuilder;
+
+    constructor() {
+        this.builder = new RamenBuilder();
+    }
 
     public setBuilder(builder: RamenBuilder): void {
         this.builder = builder;
     }
 
-    // 實作 所以選項為建議的拉麵
-    public buildDefaultRamen(): BuilderDeclaration.RamenProduct {
-        let o: BuilderDeclaration.I_Order_Ramen = {
-            taste: 'medium',
-            noodle: 'medium',
-            greenOnion: true,
-            slicedPork: true,
-            spicy: 0.5
-        }
-        return this.builder.produceStandard(o);
+    public buildDefaultRamen(): void {
+        this.builder.produceStandard(DefaultOptions);
     }
 
-    public addExtraDish(a: string[] = []): BuilderDeclaration.RamenProduct {
-        return this.builder.addExtra(a);
+    public addExtraDish(a: string[] = []): void {
+        this.builder.addExtra(a);
     }
 
-    public getProduct(): BuilderDeclaration.RamenProduct {
+    public getProduct(): RamenProduct {
         return this.builder.getProduct();
     }
 }
@@ -71,59 +67,38 @@ class RamenDirector {
 
 另外，有關於拉麵各選項的邏輯和追加功能，統一放在 `RamenBuilder` 的類別。有經驗的服務生就可以直接這個類別的方法來進行設定。
 ```typescript
-class RamenBuilder implements BuilderDeclaration.I_RamenBuilder {
-    private product: BuilderDeclaration.RamenProduct;
+export class RamenBuilder implements BuilderDeclaration.I_RamenBuilder {
+    private product: RamenProduct;
 
     constructor() {
         this.reset();
     }
 
     public reset(): void {
-        this.product = new BuilderDeclaration.RamenProduct();
+        this.product = new RamenProduct();
     }
 
-    public setSpicy(s: number = 0.5): void {
-        // ...
+    public setGreenOnion(g: number = 1): void {
+        //...
     }
 
-    public setGreenOnion(g: boolean = true): void {
-        // ...
+    // ...
+
+    public addExtra(a: string[] = []): void {
+        this.product.parts.extra = a && a.length ? a.join(',') : '';
     }
 
-    public setSlicedPork(s: boolean = true): void {
-        // ...
-    }
-
-    public setNoodle(n: BuilderDeclaration.T_Noodle = 'medium'): void {
-        // ...
-    }
-
-    public setTaste(t: BuilderDeclaration.T_Taste = 'medium'): void {
-        // ...
-    }
-
-    public addExtra(a: string[] = []): BuilderDeclaration.RamenProduct {
-        // ...
-        return this.product;
-    }
-
-    public doubleSlicedPork(): BuilderDeclaration.RamenProduct {
-        // ...
-        return this.product;
-    }
-
-    // 產生拉麵的流程
-    public produceStandard(o: BuilderDeclaration.I_Order_Ramen = {}): BuilderDeclaration.RamenProduct {
+    // 標準的製作拉麵流程
+    public produceStandard(o: BuilderDeclaration.I_Order_Ramen = {}): void {
         this.setNoodle(o.noodle);
         this.setTaste(o.taste);
         this.setGreenOnion(o.greenOnion);
         this.setSlicedPork(o.slicedPork);
         this.setSpicy(o.spicy);
-
-        return this.product;
     }
 
-    public getProduct(): BuilderDeclaration.RamenProduct {
+    // 取得拉麵
+    public getProduct(): RamenProduct {
         const result = this.product;
         this.reset();
         return result;
@@ -153,20 +128,28 @@ class RamenBuilder implements BuilderDeclaration.I_RamenBuilder {
 ```typescript
 // 為新手服務生建立一個 director
 const ramenDirector = new RamenDirector();
-let product = ramenDirector.buildDefaultRamen().addExtraDish(["半熟蛋"]).getProduct()
+ramenDirector.buildDefaultRamen();
+if (extras && extras.length)
+    ramenDirector.addExtraDish(extras);
+product = ramenDirector.getProduct();
 ```
 
 - 客人有偏好的拉麵選項，讓老鳥服務生建單
 ```typescript
 //不用建立 director，直接調用 `builder`
 const ramenBuilder = new RamenBuilder();
-ramenBuilder.setNoodle('firm');
-ramenBuilder.setTaste('light');
-ramenBuilder.setGreenOnion(false);
-ramenBuilder.setSlicedPork(true);
-ramenBuilder.setSpicy(1);
-
-let product = ramenBuilder.doubleSlicedPork().addExtraDish(["海苔"]).getProduct()
+ramenBuilder.setNoodle(options.noodle);
+ramenBuilder.setTaste(options.taste);
+ramenBuilder.setGreenOnion(options.greenOnion);
+ramenBuilder.setSlicedPork(options.slicedPork);
+ramenBuilder.setSpicy(options.spicy);
+if (extras && extras.length)
+    ramenBuilder.addExtra(extras);
+if (doubleGreenOnion)
+    ramenBuilder.doubleGreenOnion();
+if (doubleSlicedPork)
+    ramenBuilder.doubleSlicedPork();
+product = ramenBuilder.getProduct();
 ```
 
 ## 小結
