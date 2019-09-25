@@ -5,12 +5,16 @@ import { VermicelliFactory } from "./factory";
 
 interface I_Props_FatVermicelli {
   // 當麵線完成後，再交給外面的人
-  onSubmit: (v: Declaration.I_Vermicelli) => void;
+  onSubmit?: (v?: Declaration.I_Vermicelli) => void;
+  storeName?: string;
+  showName?: boolean;
 }
 
 // 建立Functional Component，props的型別傳入I_Props_FatVermicelli
 export const FatVermicelli: React.FC<I_Props_FatVermicelli> = ({
-  onSubmit
+  onSubmit,
+  storeName,
+  showName = true
 }) => {
   const vermicelliFactory = new VermicelliFactory();
 
@@ -38,6 +42,7 @@ export const FatVermicelli: React.FC<I_Props_FatVermicelli> = ({
 
   return (
     <div>
+      {showName && <h1>歡迎來到{storeName ? storeName : "小肥的麵線攤"}</h1>}
       <form onSubmit={handleSubmitOrder} id="fatVermicelliOrder">
         <label htmlFor="color">麵線顏色：</label>
         <select

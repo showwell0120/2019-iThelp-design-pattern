@@ -1,10 +1,10 @@
-# [Day10] 吃一嵐就是要硬麵加半熟蛋 ─ 建設者(Builder) <實作篇>
+# [Day10] 吃壹 LAN 就是要硬麵加半熟蛋 ─ 建設者(Builder) <實作篇>
 
 嗨 大家好 我是一路爬坡的阿肥
 
 今天是鐵人賽的第 10 天，已經過了 1/3 了！  
 最近發現寫文章卡最久的不是寫 code  
-而是在找歌跟想開場白(整個劃錯重點)
+而是在找歌跟想開場白(整個劃錯重點)![/images/emoticon/emoticon16.gif](/images/emoticon/emoticon16.gif)
 
 ---
 
@@ -33,7 +33,7 @@ export interface I_RamenBuilder {
 
 ## RamenProduct
 
-在 `builder.ts`我們先定義 `RamenProduct`類別，實作最後產生的物件會有哪些方法跟屬性。
+在 `builder.ts`我們先定義 `RamenProduct`類別，最後產生的物件會有哪些方法跟屬性。
 
 `parts` 屬性定義了產出的最後結構，並初始化預設值，並且提供 `listProduct()` 印出物件的內容。
 
@@ -63,7 +63,7 @@ export class RamenProduct {
 
 ## RamenBuilder
 
-在 `RamenBuilder` 類別，我們定義了一系列針對拉麵選項實作細節的方法。其中因為我們需要實作 `I_RamenBuilder`介面，所以還需要提供 `addExtra()` 跟 `produceStandard()` 來實作加點跟集合實作細節的方法。
+在 `RamenBuilder` 類別，我們定義了一系列針對拉麵選項實作細節的方法。其中因為我們需要實作 `I_RamenBuilder`介面，所以還需要提供 `addExtra()` 跟 `produceStandard()` 的方法。
 
 ```typescript
 export class RamenBuilder implements BuilderDeclaration.I_RamenBuilder {
@@ -181,7 +181,7 @@ export class RamenDirector {
 }
 ```
 
-## 一嵐拉麵店 開幕囉！
+## 壹 LAN 拉麵店 開幕囉！
 
 在 `index.tsx` 新增一個 FC ─ `IChiRanRamen`，並且回傳一個表單元件。我們發現這個表單其實跟工廠方法的例子很像。所以我們只看怎麼控制 checkbox 的狀態跟多選的選項。
 

@@ -99,7 +99,7 @@ clientCode();
 > 獨自對著電話說我愛你  
 > 《唯一》
 
-## [![唯一](https://img.youtube.com/vi/P7Qv4AV_StM/0.jpg)](http://www.youtube.com/watch?v=P7Qv4AV_StM "唯一")
+[![唯一](https://img.youtube.com/vi/P7Qv4AV_StM/0.jpg)](http://www.youtube.com/watch?v=P7Qv4AV_StM "唯一")
 
 ### 參考資料
 

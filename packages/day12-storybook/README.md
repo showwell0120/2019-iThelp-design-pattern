@@ -87,8 +87,6 @@ configure(loadStories, module);
 
 ## 第一個 story
 
-阿肥為了前面介紹的三種模式寫了三個 story，阿肥就以 `day6-creational-factory-method.code`的範例程式來說明。
-
 story 檔的命名格式通常為 `元件名.story.tsx`，須符合你在設定檔的篩選規則。
 
 在 story 檔匯入相關套件，通常是
@@ -111,15 +109,115 @@ storiesOf("第一層文字|第二層文字/第三層文字", module)
   />
 ), {
     //... 外掛的相關設定
+    notes: 'A very simple example of addon notes',
 })
 .add("第四層文字", () => (
     //... 還可以再加第二個story
+
 ));
 ```
 
+撰寫要點：
+
+- `storiesOf`第一個參數是 story 列表的名稱。我們可以透過`|`跟`/`顯示層狀的目錄結構，加上 `add` 的第一個參數也是帶入 story 的描述，我們最多可以有四層的列表結構。
+
+- `add` 的第二個參數是元件顯示的地方，我們可以根據元件的情境增加多個 add
+
+- `add` 的第三個參數可以進行外掛的設定。例如 `@storybook/addon-notes`就是在這裡輸入對於這個 story 的註記
+
 ## addons 大集結
 
+為了演示這些 addons，阿肥就以 `day6-creational-factory-method.code`的範例程式來改造囉。
+
+### @storybook/addon-knobs
+
+knobs 可以在 story 頁面上更改元件的 prop 值，讓你只要寫一個 story 就可以進行不同 prop 設定的測試。
+
+在 story 的寫法
+
+```typescript
+// 針對prop的型別匯入對應的function
+import { text, boolean } from "@storybook/addon-knobs";
+
+//...
+.add("演示addon-knob", () => (
+  <FatVermicelli
+    // prop傳入knobs提供的function 參數為(prop名稱, prop預設值)
+    storeName={text("storeName", "無名麵線攤")}
+    showName={boolean("showName", true)}
+  />
+))
+```
+
+結果畫面如同以下
+
+![knobs](https://i.imgur.com/JC6wj79.gif)
+
+### @storybook/addon-links
+
+links 可以在 story 產生一個連結，點擊後就會跳到指定的 story。這對做前端 UI flow 的 prototype 相當有幫助。
+
+在 story 的寫法
+
+```typescript
+//Vermicelli.story.tsx
+import { linkTo } from "@storybook/addon-links";
+//...
+
+.add("演示addon-links 1", () => (
+  <div>
+    <button
+      //@ts-ignore
+      // linkTo(storiesOf名稱, add名稱))
+      onClick={linkTo("IChiRanRamen", "演示addon-links 2")}
+    >我要改吃拉麵</button>
+    <FatVermicelli
+      storeName={text("storeName", "無名麵線攤")}
+      showName={boolean("showName", true)}
+    />
+  </div>
+))
+
+//Ramen.story.tsx
+.add("演示addon-links 2", () => (
+  <div>
+    <button
+      //@ts-ignore
+      onClick={linkTo(
+        "設計模式範例Demo|建立型模式/工廠方法",
+        "演示addon-links 1"
+      )}
+    >我要改吃麵線</button>
+    <IChiRanRamen onSubmit={v => alert(v.listProduct())} />
+  </div>
+));
+```
+
+結果畫面如同以下
+
+![links](https://i.imgur.com/eNcUao8.gif)
+
+### @storybook/addon-notes
+
+notes 可以幫你在畫布旁邊再多一個 notes 的 tab，裡面可以寫對於這個 story 相關的敘述。格式可以為純文字或是 markdown。不過 markdown 似乎格式還沒有完全支援，大家可以斟酌使用。
+
+![notes](https://i.imgur.com/cjdPwe5.png)
+
+官方還有其他實用的 addons，甚至可以整合 Jest 做靜態測試的 addon，有興趣的可以再看參考資料的連結喔。
+
 ## 小結
+
+> Sé que solo, sé que ya no soy oy oy oy 我只知道 那個人已經不是我了  
+> Mira, Sofia 看啊 蘇菲亞  
+> Sin tu mirada, sigo 沒有你的注視 我就繼續自己的人生  
+> —《Sofia》
+
+[![Sofia](https://img.youtube.com/vi/qaZ0oAh4evU/0.jpg)](http://www.youtube.com/watch?v=qaZ0oAh4evU "Sofia")
+
+聽起來很歡樂，看歌詞才知道是描述失戀的歌  
+就像開發元件，沒看到他真實的樣子，就不知道跟心目中想的差了多少
+
+最後一個重點是 Alvaro Soler 好帥，完全是阿肥我的菜！ ![/images/emoticon/emoticon42.gif](/images/emoticon/emoticon42.gif)
 
 ---
 
