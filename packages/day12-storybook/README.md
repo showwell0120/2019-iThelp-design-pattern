@@ -2,6 +2,9 @@
 
 嗨 大家好 我是一路爬坡的阿肥
 
+今天是 Happy Friday!  
+也是適合寫鐵人賽文章的好日子喔(疑?)
+
 ---
 
 ## Storybook 簡介
@@ -21,7 +24,7 @@
 
 ## 準備環境
 
-**因為 Storybook 版本差異，可能在環境的準備或設定會有不同，所以這裡會特定標註版號。你也可以視情況安裝最新版本喔**
+**因為 Storybook 版本差異，可能在環境的準備或設定會有不同，所以這裡會特定標註版號。你也可以視情況安裝最新版本喔!**
 
 由於範例專案是用 React+Typescript 開發，所以我們安裝的是 Storybook 的 React 版本，並且安裝定義檔  
 `yarn add -DW @storybook/react@5.1.11 @types/storybook__react@4.0.2`
@@ -29,57 +32,57 @@
 Storybook 有提供許多相當實用的外掛，基本可以根據專案情況看是否要安裝。如果要使用外掛的話，首先要先安裝相關套件  
 `yarn add -DW @storybook/addons@5.1.11`
 
-我們找一個外掛裝裝看，如果有另外裝定義檔也要一起裝  
+我們找一個外掛裝裝看，如果有定義檔的話也順便一起  
 `yarn add -DW @storybook/addon-knobs@5.1.11 @types/storybook__addon-knobs@3.4.1`
 
 接著建立在根目錄下新增 **.storybook** 的資料夾，基本上會需要三個檔案：
 
-- `webpack.config.js`：Storybook 是使用 webpack 建立開發環境，所以各種檔案需要的 loader 都要在這裡設定。([注意: Storybook v5.X 之後跟 v4 以前的設定會有點差異](https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#deprecate-webpack-extend-mode))
+-   `webpack.config.js`：Storybook 是使用 webpack 建立開發環境，所以各種檔案需要的 loader 都要在這裡設定。([注意: Storybook v5.X 之後跟 v4 以前的設定會有點差異](https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#deprecate-webpack-extend-mode))
 
 ```javascript
 module.exports = ({ config, mode }) => {
-  //設定loader
-  config.module.rules.push(
-    {
-      test: /\.(ts|tsx)$/,
-      loader: require.resolve("awesome-typescript-loader"),
-      include: path.resolve(__dirname, "../")
-    }
-    // ...
-  );
-  config.resolve.extensions.push(".ts", ".tsx");
-  config.plugins.push();
-  Object.assign(config.resolve.alias, {
-    ...packages.reduce(
-      (acc, name) => ({
-        ...acc,
-        [`@monorepo-react-starter/${name}`]: path.join(basePath, name, "src")
-      }),
-      {}
-    )
-  });
+    //設定loader
+    config.module.rules.push(
+        {
+            test: /\.(ts|tsx)$/,
+            loader: require.resolve('awesome-typescript-loader'),
+            include: path.resolve(__dirname, '../')
+        }
+        // ...
+    );
+    config.resolve.extensions.push('.ts', '.tsx');
+    config.plugins.push();
+    Object.assign(config.resolve.alias, {
+        ...packages.reduce(
+            (acc, name) => ({
+                ...acc,
+                [`@monorepo-react-starter/${name}`]: path.join(basePath, name, 'src')
+            }),
+            {}
+        )
+    });
 
-  return config;
+    return config;
 };
 ```
 
-- `addons.js`: 在這個檔案 import 所有會用到的外掛的入口點
+-   `addons.js`: 在這個檔案 import 所有會用到的外掛的入口點
 
 ```javascript
-import "@storybook/addon-knobs/register";
+import '@storybook/addon-knobs/register';
 ```
 
-- `config.js`：Storybook 的基本設定，有些外掛會需要在這裡以 `addDecorator`執行，Storybook 就會在頁面上幫這個外掛新增一個 tab，開發者就可以使用他的功能
+-   `config.js`：Storybook 的基本設定，有些外掛會可以在這裡以全域的方式 執行`addDecorator`，讓 Storybook 知道 stories 可以支援這個外掛並使用他
 
 ```javascript
 //匯入addon的hook
-import { withKnobs } from "@storybook/addon-knobs";
+import { withKnobs } from '@storybook/addon-knobs';
 
-const req = require.context("../packages", true, /.story.tsx?$/);
+const req = require.context('../packages', true, /.story.tsx?$/);
 function loadStories() {
-  // 加入外掛的hook
-  addDecorator(withKnobs);
-  req.keys().forEach(filename => req(filename));
+    // 加入外掛的功能
+    addDecorator(withKnobs);
+    req.keys().forEach(filename => req(filename));
 }
 
 configure(loadStories, module);
@@ -92,10 +95,10 @@ story 檔的命名格式通常為 `元件名.story.tsx`，須符合你在設定�
 在 story 檔匯入相關套件，通常是
 
 ```typescript
-import { storiesOf } from "@storybook/react";
-import * as React from "react";
+import { storiesOf } from '@storybook/react';
+import * as React from 'react';
 // 目標元件
-import { FatVermicelli } from ".";
+import { FatVermicelli } from '.';
 ```
 
 接著就可以開始寫 story 囉！架構上大致是
@@ -119,11 +122,11 @@ storiesOf("第一層文字|第二層文字/第三層文字", module)
 
 撰寫要點：
 
-- `storiesOf`第一個參數是 story 列表的名稱。我們可以透過`|`跟`/`顯示層狀的目錄結構，加上 `add` 的第一個參數也是帶入 story 的描述，我們最多可以有四層的列表結構。
+-   `storiesOf`第一個參數是 story 列表的名稱。我們可以透過`|`跟`/`顯示層狀的目錄結構，加上 `add` 的第一個參數也是帶入 story 的描述，我們最多可以有四層的列表結構。
 
-- `add` 的第二個參數是元件顯示的地方，我們可以根據元件的情境增加多個 add
+-   `add` 的第二個參數是元件顯示的地方，我們可以根據元件的情境增加多個 add
 
-- `add` 的第三個參數可以進行外掛的設定。例如 `@storybook/addon-notes`就是在這裡輸入對於這個 story 的註記
+-   `add` 的第三個參數可以進行外掛的設定。例如 `@storybook/addon-notes`就是在這裡輸入對於這個 story 的註記
 
 ## addons 大集結
 
@@ -212,7 +215,7 @@ notes 可以幫你在畫布旁邊再多一個 notes 的 tab，裡面可以寫對
 > Sin tu mirada, sigo 沒有你的注視 我就繼續自己的人生  
 > —《Sofia》
 
-[![Sofia](https://img.youtube.com/vi/qaZ0oAh4evU/0.jpg)](http://www.youtube.com/watch?v=qaZ0oAh4evU "Sofia")
+[![Sofia](https://img.youtube.com/vi/qaZ0oAh4evU/0.jpg)](http://www.youtube.com/watch?v=qaZ0oAh4evU 'Sofia')
 
 聽起來很歡樂，看歌詞才知道是描述失戀的歌  
 就像開發元件，沒看到他真實的樣子，就不知道跟心目中想的差了多少
@@ -223,5 +226,5 @@ notes 可以幫你在畫布旁邊再多一個 notes 的 tab，裡面可以寫對
 
 ### 參考資料
 
-- [Storybook](https://storybook.js.org/)
-- [Storybook-addons](https://storybook.js.org/addons/)
+-   [Storybook](https://storybook.js.org/)
+-   [Storybook-addons](https://storybook.js.org/addons/)
