@@ -74,24 +74,27 @@ var Product = /** @class */ (function (_super) {
         return false;
     };
     Product.prototype.printContent = function () {
-        return "- " + this.name + " " + this.price + "\u5143";
+        return "- \u25A2 " + this.name + " " + this.price + "\u5143";
     };
     return Product;
 }(AbstractMenu));
-var vermicelliProduct1 = new Product('大腸口味', 40);
-var vermicelliProduct2 = new Product('蚵仔口味', 40);
-var vermicelliMenu = new CompositeMenu('麵線', '');
-vermicelliMenu.add([vermicelliProduct1, vermicelliProduct2]);
-var drinkProduct1 = new Product('古早味紅茶', 20);
-var drinkProduct2 = new Product('彈珠汽水', 30);
-var drinkMenu = new CompositeMenu('涼飲', '');
-drinkMenu.add([drinkProduct1, drinkProduct2]);
-var FatFatMenu = new CompositeMenu('肥肥麵線攤', '想吃點台味來這邊');
-FatFatMenu.add([vermicelliMenu, drinkMenu]);
-var ramenProduct1 = new Product('壹LAN特製拉麵', 120);
-var ramenProduct2 = new Product('鮭魚味噌湯', 40);
-var IChiRanMenu = new CompositeMenu('壹LAN拉麵店', 'ようこそ、こちらへ！');
-IChiRanMenu.add([ramenProduct1, ramenProduct2]);
-var linkedInMenu = new CompositeMenu();
-linkedInMenu.add([IChiRanMenu, FatFatMenu]);
-console.log(linkedInMenu.printContent());
+function makeMenu() {
+    var vermicelliProduct1 = new Product('大腸口味', 40);
+    var vermicelliProduct2 = new Product('蚵仔口味', 40);
+    var vermicelliMenu = new CompositeMenu('麵線', '');
+    vermicelliMenu.add([vermicelliProduct1, vermicelliProduct2]);
+    var drinkProduct1 = new Product('古早味紅茶', 20);
+    var drinkProduct2 = new Product('彈珠汽水', 30);
+    var drinkMenu = new CompositeMenu('涼飲', '');
+    drinkMenu.add([drinkProduct1, drinkProduct2]);
+    var FatFatMenu = new CompositeMenu('肥肥麵線攤', '想吃點台味來這邊');
+    FatFatMenu.add([vermicelliMenu, drinkMenu]);
+    var ramenProduct1 = new Product('壹LAN特製拉麵', 120);
+    var ramenProduct2 = new Product('鮭魚味噌湯', 40);
+    var IChiRanMenu = new CompositeMenu('壹LAN拉麵店', 'ようこそ、こちらへ！');
+    IChiRanMenu.add([ramenProduct1, ramenProduct2]);
+    var linkedInMenu = new CompositeMenu();
+    linkedInMenu.add([IChiRanMenu, FatFatMenu]);
+    console.log(linkedInMenu.printContent());
+}
+makeMenu();

@@ -69,7 +69,7 @@ class Product extends AbstractMenu {
     }
 
     public printContent(): string {
-        return `- ${this.name} ${this.price}元`;
+        return `- ▢ ${this.name} ${this.price}元`;
     }
 }
 
