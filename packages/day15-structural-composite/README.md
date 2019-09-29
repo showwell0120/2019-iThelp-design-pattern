@@ -29,7 +29,7 @@
 ## 組合模式
 先看guru上的解釋：
 > Composite is a structural design pattern that lets you compose objects into tree structures and then work with these structures as if they were individual objects.   
-(組合是一種行為型的模式，讓你以樹狀的結構組合物件，並且可視為單一的物件，對於這些結構進行操作)
+(組合是一種結構型的模式，讓你以樹狀的結構組合物件，並且可視為單一的物件，對於這些結構進行操作)
 
 我們對於樹狀結構最熟悉的就是檔案總管啦。一個資料夾中可以只包含檔案，也可以包含資料夾。把這些目錄的關係用畫圖來顯示的話，就是一個樹狀結構。
 
