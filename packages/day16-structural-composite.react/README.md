@@ -7,8 +7,6 @@
 ## React的組合模式
 在前端開發中，我們會實作出許多UI元件，像是對話框、工具列等等。其中，某些元件可能會需要共用的操作邏輯或UI，像是對話框元件會根據內容和性質的不同，會有警示對話框、提示對話框，或表單輸入的對話框等等。所以React在這一方面效仿組合模式的精神，建立了傳遞 **`props`** 的機制，透過最基本的props功能，就能達到元件間共用邏輯&UI的目的。
 
-
-
 ### 自訂props
 只要寫過React的人應該都很熟悉，目前為止的範例程式也用了不少自訂props來傳遞屬性和方法。這種方式就是React中的組合模式。
 
@@ -69,10 +67,10 @@ storiesOf('ProductMenu', module).add('ProductMenu', () =>
 ![result](https://i.imgur.com/tbKAc1k.png)
 
 ## 寫React用組合還是繼承 どち？ 
-在React文件中，很明確地說明
->在 Facebook 中，我們使用 React 在成千上萬個 component，我們找不到任何使用案例來推薦你建立繼承結構的 component。      
-Prop 和 composition 提供你明確和安全的方式來自訂 component 的外觀和行為所需的靈活性。請記得，component 可以接受任意的 prop，包含 primitive value、React element，或者是 function。   
-如果你想要在 component 之間複用非 UI 的功能，我們建議抽離它到一個獨立的 JavaScript 模組。Component 可以 import 並使用它的 function、object，或者是 class，而不需要繼承它。)
+在React文件中，很明確地說明：
+>在 Facebook 中，我們使用 React 在成千上萬個 component，我們找不到任何使用案例來推薦你建立繼承結構的 component。     
+...   
+如果你想要在 component 之間複用非 UI 的功能，我們建議抽離它到一個獨立的 JavaScript 模組。Component 可以 import 並使用它的 function、object，或者是 class，而不需要繼承它。
 
 ### 什麼是繼承(Inheritance)？
 在類別中，可以透過 `extends` 讓子類別可以擁有父類別的的屬性和方法，並且根據子類別需求加以擴增。所以使用繼承也可以達到共用程式碼的目的。
