@@ -1,4 +1,4 @@
-# [Day20] Jest
+# [Day21] 精通React測試驅動開發 ─ TDD & Jest
 
 嗨 大家好 我是一路爬坡的阿肥   
 
