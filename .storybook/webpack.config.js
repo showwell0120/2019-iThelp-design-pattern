@@ -34,7 +34,7 @@ module.exports = ({ config, mode }) => {
     ...packages.reduce(
       (acc, name) => ({
         ...acc,
-        [`@monorepo-react-starter/${name}`]: path.join(basePath, name, "src")
+        [`@Design-Pattern-Typescript-React/${name}`]: path.join(basePath, name, "src")
       }),
       {}
     )
