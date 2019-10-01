@@ -8,17 +8,28 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "removeComments": true,
+    "experimentalDecorators": true,
     "rootDir": "./",
     "baseUrl": "./",
     "paths": {
-      "@kmclient/*": ["packages/*/src"],
-      "*": ["node_modules", "packages"]
+      "@kmclient/*": [
+        "packages/*/src"
+      ],
+      "*": [
+        "node_modules",
+        "packages"
+      ]
     }
   },
   "awesomeTypescriptLoaderOptions": {
     "useBabel": true,
     "babelCore": "@babel/core"
   },
-  "include": ["packages"],
-  "exclude": ["node_modules", "packages/**/dist"]
+  "include": [
+    "packages"
+  ],
+  "exclude": [
+    "node_modules",
+    "packages/**/dist"
+  ]
 }

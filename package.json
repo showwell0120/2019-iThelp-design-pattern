@@ -16,6 +16,7 @@
   "devDependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.1",
+    "@babel/plugin-proposal-decorators": "^7.6.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.0.0",
@@ -29,6 +30,7 @@
     "@types/enzyme-adapter-react-16": "^1.0.3",
     "@types/jest": "^23.3.5",
     "@types/react": "^16.9.2",
+    "@types/recompose": "^0.30.7",
     "@types/storybook__addon-actions": "^3.4.1",
     "@types/storybook__addon-knobs": "^3.4.1",
     "@types/storybook__addon-links": "^3.3.2",
@@ -48,6 +50,7 @@
     "node-sass": "^4.12.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "recompose": "^0.30.0",
     "sass-loader": "^7.3.1",
     "style-loader": "^1.0.0",
     "ts-jest": "^23.10.4",

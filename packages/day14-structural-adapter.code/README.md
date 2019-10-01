@@ -4,15 +4,17 @@
 
 寫著寫著竟然已經撐兩個禮拜了！  
 果然有參加比賽有差  
-可以訓練自己擺脫三分鐘熱度的壞習慣=P
+可以訓練自己擺脫三分鐘熱度的壞習慣 ![/images/emoticon/emoticon07.gif](/images/emoticon/emoticon07.gif)
 
 ---
 
 ## 給個定義
 
-經過昨天的講解後，我們知道這個模式主要會有類別：希望被轉接的類別，以及轉接後的目標類別。
+我們知道轉接器模式主要的類別會有：希望被轉接的類別，以及轉接後的目標類別。
 
-以喵喵本身來說，她會的方法就是喵喵叫跟搖尾巴；最後希望得到的是知道她的心情跟動作意涵。所以我們先來定義這些方法：
+以喵喵本身來說，她會的方法就是喵喵叫跟搖尾巴；最後希望得到的是，知道她的心情跟動作意涵。
+
+我們先來定義這些方法：
 
 ```typescript
 namespace AdapterDeclaration {
@@ -50,7 +52,7 @@ abstract class Target implements AdapterDeclaration.I_Target {
 }
 ```
 
-接著實作喵喵類別。我大喵皇不需特別幹嘛，只要會喵喵叫跟搖尾巴就好。
+接著實作喵喵類別，我大喵皇不需會什麼，只要會喵喵叫跟搖尾巴就好。
 
 ```typescript
 export class MeowAdaptee implements AdapterDeclaration.I_MeowAdaptee {
@@ -81,9 +83,9 @@ const VoiceMoodMapping: { [key in AdapterDeclaration.T_Mood]: string[] } = {
 
 好了之後就可以來做轉接器囉！
 
-首先在建構式中把貓咪的實體傳進來，以使用他的方法。
+首先在建構式中把貓咪的實體傳進來，之後可以使用他的方法。
 
-然後這裡有個小技巧。`getMood()` 跟 `getAction()` 方法都是透過 dictionary 來查詢，我們可以再實作一個方法 `getValue()` 來減少重複的邏輯撰寫，讓程式看起來更精簡。
+然後這裡有個小技巧。`getMood()` 跟 `getAction()` 方法都是透過 dictionary 來查詢，我們可以再實作一個方法 `getValue<T>()` 來實現查詢結果的回傳。一來減少撰寫過程中來減少重複的邏輯撰寫，讓程式看起來更精簡; 二來利用Typescript的泛型傳入回傳結果的型別，讓開發過程中減少錯誤產生，也讓程式更有彈性。
 
 ```typescript
 export class MeowAdapter extends Target {
@@ -139,7 +141,7 @@ export class MeowAdapter extends Target {
 
 翻譯機的功能非常簡單，只要下拉選擇叫聲跟尾巴的選項，再按送出，就可以得到翻譯結果。所以一樣實作表單元件即可。
 
-不過這裡有個小技巧。我們不希望選項是元件自己慢慢新增，可以的話就從現有的資料來呈現。所以我們匯入剛剛建立的兩個 dictionary ， 利用 JavaScript 的 `map()`, `flat()` 來時作看看。
+不過這裡有個小技巧。我們不希望選項是元件自己慢慢新增，可以的話就從現有的資料來呈現。所以我們匯入剛剛建立的兩個 dictionary ， 利用 JavaScript 陣列的 `map()`, `flat()` 來實作看看。
 
 ```typescript
 //...

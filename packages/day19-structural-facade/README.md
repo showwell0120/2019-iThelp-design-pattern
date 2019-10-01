@@ -1,17 +1,17 @@
-# [Day15] 結構型模式 ─ 外觀(Facade)
+# [Day19] 我要輕鬆成為股海高手！ ─ 外觀(Facade) <模式篇>
 
 嗨 大家好 我是一路爬坡的阿肥   
 
 
 ---
 
-## 
+## 情境描述
 
-## 
+## 分工合作 開始！
 
-## 
+## 外觀模式(Facade Pattern)
 
-## 
+## 跟建設者模式(Builder Pattern)的比較
 
 ## 小結
 
@@ -19,4 +19,5 @@
 
 ### 參考資料   
 
-- [維基百科](https://zh.wikipedia.org/wiki/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F_(%E8%AE%A1%E7%AE%97%E6%9C%BA)#%E5%88%86%E7%B1%BB)
+- [guru - Facade](https://refactoring.guru/design-patterns/facade)
+- [外觀模式 Facade Pattern](https://dotblogs.com.tw/jesperlai/2018/04/15/153646)
