@@ -2,11 +2,16 @@
 
 嗨 大家好 我是一路爬坡的阿肥
 
+昨天因為老毛病發作想說去看中醫
+結果脖子後面被札了十幾針 
+還被喬到發出喀喀喀的聲音
+有種比發作時還要可怕的感覺![/images/emoticon/emoticon16.gif](/images/emoticon/emoticon16.gif)
+
 ---
 
 ## 複雜的 API connector 跟 Data processor
 
-工讀生 A、B 各別負責寫個股相關資料的 API 串接類別，以及回傳結果的資料處理類別。這兩個類別在外觀模式中扮演 client 需要面對的兩個複雜系統。
+工讀生 A、B 各別負責寫個股相關資料的 API 串接類別，以及回傳結果的資料處理類別。這兩個類別在外觀模式中扮演 client 需要面對的兩個複雜子系統。
 
 StockAPI.ts - 台灣證交所 API 串接
 
@@ -165,7 +170,7 @@ async function handleSubmit(e) {
 
 所以外觀模式算是相當實用也蠻重要的模式，希望大家看完都會有收穫喔！
 
-今天的程式實作會在 [github](https://github.com/showwell0120/Design-Pattern-Typescript-React) 的 `packages/src/day20-strusctural.facade.react`
+今天的程式實作會在 [github](https://github.com/showwell0120/Design-Pattern-Typescript-React) 的 `packages/src/day20-strusctural.facade.code`
 
 ---
 

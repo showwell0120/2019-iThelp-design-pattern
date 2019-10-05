@@ -1,4 +1,4 @@
-# [Day24] 行為型模式 ─ 觀察者(Observer)
+# [Day25] 每個人會要訂閱的颱風假最新通知 ─ 觀察者(Observer) <實作篇>
 
 嗨 大家好 我是一路爬坡的阿肥   
 
@@ -14,6 +14,8 @@
 ## 
 
 ## 小結
+
+今天的程式實作會在 [github](https://github.com/showwell0120/Design-Pattern-Typescript-React) 的 `packages/src/day25-behavioral.observer.code`
 
 ---
 

@@ -1,4 +1,4 @@
-# [Day22] 行為型模式 ─ 命令(Command)
+# [Day23] 打造輕鬆編輯的顏文字編輯器吧！ ─ 命令(Command) <實作篇>
 
 嗨 大家好 我是一路爬坡的阿肥   
 
@@ -14,6 +14,8 @@
 ## 
 
 ## 小結
+
+今天的程式實作會在 [github](https://github.com/showwell0120/Design-Pattern-Typescript-React) 的 `packages/src/day23-behavioral.command.code`
 
 ---
 

@@ -1,4 +1,4 @@
-# [Day26] 行為型模式 ─ 迭代器(Iterator)
+# [Day29] 操作大量資料的好幫手 ─ 迭代器(Iterator) <實作篇>
 
 嗨 大家好 我是一路爬坡的阿肥   
 
@@ -14,6 +14,8 @@
 ## 
 
 ## 小結
+
+今天的程式實作會在 [github](https://github.com/showwell0120/Design-Pattern-Typescript-React) 的 `packages/src/day29-behavioral.iterator.code`
 
 ---
 
