@@ -23,9 +23,111 @@
 > Command is a behavioral design pattern that turns a request into a stand-alone object that contains all information about the request. This transformation lets you parameterize methods with different requests, delay or queue a request’s execution, and support undoable operations.   
 (命令模式是行為型的模式，可以將請求轉換為獨立的物件，包含了所有有關這個請求的資訊。轉換過程中可以讓你藉由不同的請求、延遲請求的執行或排入佇列，以及支援可還原的操作。)
 
-## 
+我們可以用生活中的例子來大致理解這個模式。有些東西其實是我們需要發送某種命令，這個命令可能還會透過一個媒介，讓實際製作東西的人接收。   
+例如：   
+- 想吃拉麵的客人點餐 -> 服務生將單子給師傅 -> 師傅收到單子後製作拉麵
+- 想喝飲料的某人在自動販賣機的面板按下號碼 -> 面板將號碼傳給機器 -> 機器將飲料推下來   
 
-## 
+...其實命令模式是無所不在，在軟體開發中也是一樣。
+
+敏捷開發大師 Robert C. Martin 關於命令模式曾這麼說過：
+>命令模式，是我認為最簡單且優雅的模式之一，其可運用的範圍，或許沒有界限。
+
+在管理系統、資料庫交易、遊戲的指令控制等等，都能用命令模式實現。當中如果需要實作特殊功能，像是 **紀錄指令動作**、 **復原上次指令**、 **佇列**、**日誌** 等，更適用命令模式。
+
+## 四大角色
+接著我們來搭配今天的例子來說明命令模式的四大角色吧！
+
+### Receiver - 接收者 EmojiEditor
+根據命令的請求執行，並產出最後的結果。我們寫在EmojiEditor。這個元件主要是文字輸入框，並且會輸出一些可以使本身狀態更新的方法。明天會再來說明實作的細節。
+```typescript
+const EmojiEditor = React.forwardRef((props, ref) => {
+    // ... 提供Command呼叫的方法，並且執行狀態的更新。
+    getText(): string {
+        return textContent;
+    },
+    setText(s: string): void {
+        setTextContent(s);
+    },
+    selectText(): void {
+        textAreaRef.current.select();
+    }
+    // ...
+
+    return <textarea {...} value={textContent} onChange={e => setTextContent(e.target.value)}></textarea>
+})
+```
+### Command & ConcreteCommand - 命令的抽象類別與具體類別
+抽象類別負責定義必要的方法跟屬性，其中至少會有一個 execute() 的抽象操作。以及實作基本共用的方法。   
+具體類別根據命令的不同，來繼承抽象類別，實作自己的邏輯。
+
+先看抽象類別。
+```typescript
+abstract class Command {
+    //...
+
+    // 實作基本共用的方法
+    public saveBackUp() {
+        // ...
+    }
+    public undo() {
+        //...
+    }
+
+    // 留給具體類別實作
+    public execute(): void { }
+}
+```
+
+再看繼承抽象類別的具體類別。
+
+```typescript
+export class CopyCommand extends Command {
+    public execute(): void {
+        // 呼叫接收者
+        this.editorRef.current.selectText();
+        // ...
+    }
+}
+```
+
+### Client - EmojiApp
+建立具體命令類別的物件，並且設定Receiver。我們寫在 EmojiApp。
+```typescript
+export const EmojiApp: React.FC<any> = props => {
+    // 產生接收者，也就是EmojiEditor元件
+    const editorRef = React.useRef<HTMLDivElement>(null);
+
+    // 建立具體命令類別的物件
+    const copyCmd = new CopyCommand(editorRef);
+
+    // ...
+
+    return (<div>
+            //...
+            // 渲染接收者
+            <EmojiEditor ref={editorRef} />
+        </div>
+    </div>);
+```
+### Invoker - EmojiApp
+儲存建立好的具體命令物件，並且負責呼叫指令的執行function。如果有實作復原功能，也會在這裡儲存指令的狀態。由於這個例子很單純，我們一樣寫在 EmojiApp 就可以。
+```typescript
+export const EmojiApp: React.FC<any> = props => {
+    // ... 儲存指令的狀態
+    const history: I_Command[] = [];
+
+    // 負責呼叫指令的執行function
+    const executeCmd = (cmd: I_Command) => {
+        if (cmd.execute) {
+            history.push(cmd);
+            console.log('executeCmd - history:', history)
+            cmd.execute();
+        }
+    }
+
+    //...
+```
 
 ## 小結
 現在肥醬可以更快地在他的訊息加上顏文字，可以聊的天又更多了～
@@ -46,3 +148,4 @@
 ### 參考資料   
 
 - [guru - Command](https://refactoring.guru/design-patterns/command)
+- [命令模式 (Command Pattern)](https://notfalse.net/4/command-pattern)
