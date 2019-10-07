@@ -19,7 +19,7 @@ abstract class FightStrategy {
     public setWeapon(e: E_ChuchuMaru): string {
         return `武器使用：啾啾丸 ${e}`;
     }
-    // 留給繼承的策略實作細節
+    // 留給繼承的策略類別實作細節
     public excute(): any { }
 }
 ```

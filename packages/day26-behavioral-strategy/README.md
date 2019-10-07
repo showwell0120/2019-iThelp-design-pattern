@@ -22,9 +22,54 @@
 > Strategy is a behavioral design pattern that lets you define a family of algorithms, put each of them into a separate class, and make their objects interchangeable.   
 (策略模式是行為型的模式，讓你可以為每個項目產生各自的類別，並且定義一系列的演算法。最後可以讓他們的物件可以交互使用。)
 
-## 
+在系統開發中，最常用來做決策與判斷該執行哪段程式的方式，就是 `if else` 跟 `swtich case` 了。 
 
-## 
+在決策樹簡單，執行程式也單純的情況下，我們可以用一般的語法來解決。但是如果決策的流程太多或太深，主程式可能光是 `if else` 或 `swtich case` 就佔了大半，大大降低可讀性; 另外決策內容的執行程式如果都有各自複雜的執行邏輯，而且沒有進行封裝的話，可能就不好維護和擴充，甚至也很難妥善分離功能，進行協同開發。
+
+而策略模式就是要解決這種問題，來達到程式單一職責的目的。這個模式有兩大主要的類別，接下來搭配例子來說明。
+
+### Strategy - 抽象策略類別 & 實體策略類別
+對應到 `if else`的實作，其實就是區塊裡執行的內容。我們把執行的內容稱為 **策略**，並且為這些策略建立一個抽象的類別。其中，`excute()` 是定義每個策略類別需要實作複雜邏輯的方法，另外可以定義一些共用的方法供類別使用。
+```typescript
+abstract class FightStrategy {
+    // 留給繼承的策略實作細節
+    public excute(): any { }
+
+    // 共用方法
+    public setWeapon(e: E_ChuchuMaru): string {
+        //...
+    }
+}
+```
+
+繼承抽象類別的策略類別，只要實作 `excute()`即可。
+```typescript
+export class Lavel1FightStrategy extends FightStrategy {
+    public excute(): I_StrategyResult {
+        //...
+    }
+}
+```
+
+### Context - 策略中心類別
+這個類別負責決策的流程，以及策略類別的建立與存取。其中，`outputStrategy()` 會執行目前儲存的策略實體的 `excute()`，來產出決策的結果。 `setStrategy()` 可以根據實際情況，直接將新的策略實體傳入取代現有策略; 或是將判斷用的參數傳入，在這裏進行決策的流程，並且決定要建立哪種策略實體。
+```typescript
+export class StrategyCenter {
+    protected strategy: FightStrategy;
+
+    constructor(strategy?: FightStrategy) {
+        if (strategy) this.strategy = strategy;
+    }
+
+    public setStrategy() {
+        // ...
+    }
+
+    public outputStrategy(): I_StrategyResult {
+        return this.strategy.excute();
+    }
+}
+```
 
 ## 小結
 已經熟悉策略模式的和肥，接下來不管遇到什麼樣的敵人，只要經過策略模式的演算，使出完美技能，相信可以在異世界闖出一片天地的！
