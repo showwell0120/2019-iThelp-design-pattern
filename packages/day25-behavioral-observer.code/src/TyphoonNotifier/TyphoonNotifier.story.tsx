@@ -2,7 +2,7 @@ import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import * as Obs from './observer';
 
-import { TyphoonNotifier, startDesiding } from '.'
+import { TyphoonNotifier, TyphoonCenter } from '.'
 
 let notifierCenter = new Obs.TyphoonNotifyCenter();
 let notifier1 = new Obs.TyphoonNotifiedClient("台北李先生", Obs.E_CityCode.tpe);
@@ -14,11 +14,9 @@ notifierCenter.addObserver(notifier3);
 let notifier4 = new Obs.TyphoonNotifiedClient("高雄陳先生", Obs.E_CityCode.ka);
 notifierCenter.addObserver(notifier4);
 
-startDesiding(notifierCenter);
-
-storiesOf('Observer Pattern', module).add('TyphoonNotifier', () => <div>
+storiesOf('Observer Pattern', module).add('TyphoonNotifier', () => <TyphoonCenter center={notifierCenter}>
     <TyphoonNotifier notifier={notifier1} />
     <TyphoonNotifier notifier={notifier2} />
     <TyphoonNotifier notifier={notifier3} />
     <TyphoonNotifier notifier={notifier4} />
-</div>);
+</TyphoonCenter>);

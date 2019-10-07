@@ -179,6 +179,23 @@ export const TyphoonNotifier: React.FC<I_Props_TyphoonNotifier> = ({ notifier })
 }
 ```
 
+另外我們做個通知中心的元件，當元件渲染完成，就呼叫 `startDesiding()` 開始執行模擬程式。
+```typescript
+export interface I_Props_TyphoonCenter {
+    center: Obs.TyphoonNotifyCenter;
+}
+
+export const TyphoonCenter: React.FC<I_Props_TyphoonCenter> = ({ center, children }) => {
+    // 傳入空陣列，相當於 React ComponentDidMount
+    React.useEffect(() => {
+        startDesiding(center)
+    }, []);
+
+    return <div>{children}</div>
+}
+
+```
+
 ## Storybook 跑起來
 ### 成立颱風假通知管理中心 & 新增訂閱者
 ```typescript
@@ -191,19 +208,16 @@ let notifier3 = new Obs.TyphoonNotifiedClient("台南蔡小姐", Obs.E_CityCode.
 notifierCenter.addObserver(notifier3);
 let notifier4 = new Obs.TyphoonNotifiedClient("高雄陳先生", Obs.E_CityCode.ka);
 notifierCenter.addObserver(notifier4);
-
-// 開始模擬發布颱風假
-startDesiding(notifierCenter);
 ```
 
 ### 顯示UI
 ```jsx
-<div>
+<TyphoonCenter center={notifierCenter}>
     <TyphoonNotifier notifier={notifier1} />
     <TyphoonNotifier notifier={notifier2} />
     <TyphoonNotifier notifier={notifier3} />
     <TyphoonNotifier notifier={notifier4} />
-</div>
+</TyphoonCenter>
 ```
 執行`yarn story`後，開啟`http://localhost:6006`，然後切到`Observer Pattern/TyphoonNotifier`，就可以看到畫面了。
 

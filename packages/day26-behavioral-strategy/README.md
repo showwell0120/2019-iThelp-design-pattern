@@ -1,4 +1,4 @@
-# [Day26] 為厲害的怪獻上會心一擊 ─ 策略(Stretegy) <模式篇>
+# [Day26] 為厲害的怪獻上會心一擊 ─ 策略(Strategy) <模式篇>
 
 嗨 大家好 我是一路爬坡的阿肥   
 
@@ -13,11 +13,11 @@
 
 - 遇到會飛高麗菜：武器 啾啾丸第一型＋Dark尼斯的 肉盾戰術
 - 遇到巨型蟾蜍：武器 啾啾丸第二型＋啊！嗑啞的 淨化魔法
-- 遇到超強魔王：武器 啾啾丸第三型＋會會的 explosion!!
+- 遇到魔王軍幹部：武器 啾啾丸第三型＋會會的 explosion!!
 
-對於和肥來說，只要關注現在的敵人是誰，然後發動對應的技能; 並不需要知道同伴跟武器如何實現技能。我們可以說，想在異世界生存下來，熟悉 **策略模式(Stretegy Pattern)** 的運用，就是個不可或缺的實力。
+對於和肥來說，只要關注現在的敵人是誰，然後發動對應的技能; 並不需要知道同伴跟武器如何實現技能。我們可以說，想在異世界生存下來，熟悉 **策略模式(Strategy Pattern)** 的運用，就是個不可或缺的實力。
 
-## 策略模式 (Stretegy Pattern)
+## 策略模式 (Strategy Pattern)
 先看guru上的解釋：
 > Strategy is a behavioral design pattern that lets you define a family of algorithms, put each of them into a separate class, and make their objects interchangeable.   
 (策略模式是行為型的模式，讓你可以為每個項目產生各自的類別，並且定義一系列的演算法。最後可以讓他們的物件可以交互使用。)
@@ -46,3 +46,4 @@
 ### 參考資料   
 
 - [guru - Stretegy](https://refactoring.guru/design-patterns/stretegy)
+- [策略模式 Strategy Pattern](https://skyyen999.gitbooks.io/-study-design-pattern-in-java/content/strategy.html)

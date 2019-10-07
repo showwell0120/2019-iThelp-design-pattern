@@ -46,6 +46,7 @@ export interface I_Props_TyphoonNotifier {
 export const TyphoonNotifier: React.FC<I_Props_TyphoonNotifier> = ({ notifier }) => {
     const [result, setResult] = React.useState<Obs.E_Result>(Obs.E_Result.not_yet)
     notifier.setUpdateCallback(setResult);
+
     return <div>
         <ul>
             <li>名稱：{notifier.clientId}</li>
@@ -53,6 +54,18 @@ export const TyphoonNotifier: React.FC<I_Props_TyphoonNotifier> = ({ notifier })
             <li className={result}>是否放颱風假：{ResultWordDict[result]}</li>
         </ul>
     </div>
+}
+
+export interface I_Props_TyphoonCenter {
+    center: Obs.TyphoonNotifyCenter;
+}
+
+export const TyphoonCenter: React.FC<I_Props_TyphoonCenter> = ({ center, children }) => {
+    React.useEffect(() => {
+        startDesiding(center)
+    }, []);
+
+    return <div>{children}</div>
 }
 
 
