@@ -11,7 +11,7 @@ export interface I_Iterator<T> {
     rewind(): void;
 }
 
-export interface I_Aggregator {
+export interface I_IterableCollection {
     getIterator(): I_Iterator<I_CustomerData>;
 }
 
@@ -56,7 +56,7 @@ export class CustomerIterator implements I_Iterator<I_CustomerData> {
     }
 }
 
-export class CustomerCollection implements I_Aggregator {
+export class CustomerCollection implements I_IterableCollection {
     private customers: I_CustomerData[] = [];
 
     constructor(customers: I_CustomerData[] = []) {
