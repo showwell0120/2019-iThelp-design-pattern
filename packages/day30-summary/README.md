@@ -49,7 +49,7 @@
 裝飾者(Decorator) | [[Day17] Switch的各種同捆包 統統裝起來 ─ 裝飾者(Decorator) <模式篇>](https://ithelp.ithome.com.tw/articles/10222843)
 外觀(Facade) | [[Day19] 我要輕鬆成為股海高手！ ─ 外觀(Facade) <模式篇>](https://ithelp.ithome.com.tw/articles/10224517)
 命令(Command) | [[Day22] 打造輕鬆編輯的顏文字編輯器吧！ ─ 命令(Command) <模式篇>](https://ithelp.ithome.com.tw/articles/10225589)
-觀察者(Observer) | [[Day24] 每個人都要訂閱的颱風假最新通知 ─ 觀察者(Observer) <模式篇>]()
+觀察者(Observer) | [[Day24] 每個人都要訂閱的颱風假最新通知 ─ 觀察者(Observer) <模式篇>](https://ithelp.ithome.com.tw/articles/10226356)
 策略(Stretegy) | [[Day26] 為厲害的怪獻上會心一擊 ─ 策略(Stretegy) <模式篇>]()
 迭代器(Iterator) | [[Day28] 操作大量資料的好幫手 ─ 迭代器(Iterator) <模式篇>]()
 
