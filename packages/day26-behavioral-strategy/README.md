@@ -3,6 +3,10 @@
 嗨 大家好 我是一路爬坡的阿肥   
 
 今天是澎湖遊 Day2，先來分享個照片吧～
+hj/6
+
+![photo](https://i.imgur.com/UBAlZWc.jpg)
+
 ---
 
 ## 情境描述
