@@ -48,7 +48,9 @@ const CustomerProcessor: React.FC<I_Props_CustomerProcessor> = ({ collection }) 
 
         setMailInfoList(_mailInfoList);
         console.log('TCL: outputMailInfo -> _mailInfoList', _mailInfoList);
+
         setRecordList(_recordList);
+        console.log('TCL: outputMailInfo -> _recordList', _recordList);
     };
 
     return (
