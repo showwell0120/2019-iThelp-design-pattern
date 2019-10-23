@@ -7,6 +7,10 @@
 
 今天是澎湖遊最後一天，還是一樣跟大家分享個照片～
 
+最想念的應該是漂亮的海水跟夕陽
+
+![photo](https://i.imgur.com/31DJjdx.jpg)
+
 ---
 
 ## 情境描述
@@ -35,13 +39,91 @@
 搭配剛剛的例子，來看看要實現迭代器會有哪些角色吧！
 
 ### 迭代器的訪問方法類別 - Iterator
+Iterator 提供外部訪問資料的方法，像是：
+- `current()` : 取得當前訪問的資料元素
+- `next()` : 取得下一個資料元素
+- `key()` : 取得當前訪問資料元素的key值
+- `hasNext()` : 是否還有下一個資料元素
+- `rewind()` : 回到第一個資料元素
 
+實作上大致會像這樣：
 ```typescript
+export class CustomerIterator implements I_Iterator<I_CustomerData> {
+    // 儲存資料操作的集合實體
+    private collection: CustomerCollection;
+    // 紀錄現在的位置
+    private position: number = 0;
+
+    // 初始化，傳入資料操作的集合實體
+    constructor(collection: CustomerCollection) {
+        this.collection = collection;
+    }
+
+    // 一系列訪問資料的方法
+    public rewind() {
+        this.position =  0;
+    }
+    public current(): any {
+        return this.collection.getCustomers()[this.position];
+    }
+    public key(): number {
+        return this.position;
+    }
+    public next(): any {
+        const customer = this.collection.getCustomers()[this.position];
+        this.position += 1;
+        return customer;
+    }
+    public hasNext(): boolean {
+        return this.position < this.collection.getCount();
+    }
+}
+
 ```
 
-### 搭配資料操作的集合類別 - IterableCollection
-
+### 資料操作的集合類別 - IterableCollection
+客戶端建立這個類別使用迭代器，所以需有個方法 `getIterator()` 來取得迭代器的實體，並且把本身傳入接著根據外部需求，建立需要對資料操作和存取的方法。
 ```typescript
+class CustomerCollection {
+    private customers: I_CustomerData[] = [];
+
+    // 初始化將資料傳入
+    constructor(customers: I_CustomerData[] = []) {
+        this.customers = customers;
+    }
+
+    // 取得迭代器的實體，並且把實體本身(this)傳入
+    public getIterator(): I_Iterator<I_CustomerData> {
+        return new CustomerIterator(this);
+    }
+
+    // 一系列操料資料的方法
+    public getCustomers(): I_CustomerData[] {
+        return this.customers;
+    }
+    public getCount(): number {
+        return this.customers.length;
+    }
+    public addCustomer(customer: I_CustomerData): void {
+        this.customers.push(customer);
+    }
+}
+```
+
+### 建立迭代器
+最後來用迭代器看看。我們來看看大致上的程式吧！
+```typescript
+// 有個資料陣列
+let customers = [...];
+// 傳入資料，建立資料操作的集合類別
+let collection = new It.CustomerCollection(customers);
+// 對資料新增元素
+collection.addCustomer(customer);
+// 對資料進行訪問
+while (iterator.hasNext()) {
+    let customer = iterator.next();
+    // ... do some work
+}
 ```
 
 ## 其實 `forEach` `$.each`都是迭代器一族
@@ -58,6 +140,8 @@
 `arrayWithSomething.forEach(function(value) { //... })`
 
 ## 小結
+
+有了用迭代器模式實作的小工具後，肥兒又恢復以前不用加班的幸福快樂的日子了！
 
 > 曾經辜負哪位 這才被虧欠  
 > 路過人間 一直這輪迴  
