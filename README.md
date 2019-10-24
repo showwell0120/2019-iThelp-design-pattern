@@ -1,4 +1,4 @@
-# Design-Pattern-Typescript-React
+[![CircleCI](https://circleci.com/gh/showwell0120/Design-Pattern-Typescript-React/tree/master.svg?style=svg)](https://circleci.com/gh/showwell0120/Design-Pattern-Typescript-React/tree/master)
 
 ## 從哪裡開始?
 
@@ -46,5 +46,5 @@
 
 ## 參考
 
-- [monorepo-babel-ts-lerna-starter](https://github.com/serhii-havrylenko/monorepo-babel-ts-lerna-starter)
-- [Workspaces in Yarn](https://yarnpkg.com/blog/2017/08/02/introducing-workspaces/)
+-   [monorepo-babel-ts-lerna-starter](https://github.com/serhii-havrylenko/monorepo-babel-ts-lerna-starter)
+-   [Workspaces in Yarn](https://yarnpkg.com/blog/2017/08/02/introducing-workspaces/)
